@@ -43,6 +43,7 @@
             this.readID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.readTrackingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.readBox)).BeginInit();
             this.panel1.SuspendLayout();
@@ -127,7 +128,6 @@
             this.input3.Name = "input3";
             this.input3.Size = new System.Drawing.Size(155, 20);
             this.input3.TabIndex = 3;
-            this.input3.TextChanged += new System.EventHandler(this.input3_TextChanged);
             this.input3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input3_KeyDown);
             // 
             // input2
@@ -137,7 +137,6 @@
             this.input2.Name = "input2";
             this.input2.Size = new System.Drawing.Size(140, 20);
             this.input2.TabIndex = 2;
-            this.input2.TextChanged += new System.EventHandler(this.input2_TextChanged);
             this.input2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input2_KeyDown);
             // 
             // input1
@@ -147,7 +146,6 @@
             this.input1.Name = "input1";
             this.input1.Size = new System.Drawing.Size(140, 20);
             this.input1.TabIndex = 1;
-            this.input1.TextChanged += new System.EventHandler(this.input1_TextChanged);
             this.input1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input1_KeyDown);
             // 
             // listQT
@@ -212,11 +210,22 @@
             this.panel1.Size = new System.Drawing.Size(501, 179);
             this.panel1.TabIndex = 12;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(587, 172);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Delete ";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(689, 321);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
@@ -246,6 +255,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn readOrderNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn readID;
         private System.Windows.Forms.DataGridViewTextBoxColumn readTrackingNumber;
+        private System.Windows.Forms.Button button1;
     }
 }
 
