@@ -157,7 +157,6 @@
             this.listQT.Name = "listQT";
             this.listQT.Size = new System.Drawing.Size(42, 21);
             this.listQT.TabIndex = 4;
-            this.listQT.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.listQT.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listQT_KeyDown);
             // 
             // readBox
