@@ -7,18 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+
 
 namespace App
 {
     public partial class Form1 : Form
     {
+        Database PackingDB = new Database();
         public Form1()
         {
             InitializeComponent();
             addQ();
+            readBox.ClearSelection();
             input1.Focus();
-            //createDB();
+            PackingDB.initDB();
+            addTable();
+            
         }
 
         //public Dictionary<int, List<string>> portsText = new Dictionary<int, List<string>>();
@@ -28,14 +32,10 @@ namespace App
         //
         //  Quantity Select
         //
-        private void listQT_KeyDown(object sender, KeyEventArgs e)
+        private void listQT_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                input1.Focus();
-            }
+            input1.Focus();
         }
-
         //
         //  Quantity Intialization
         //
@@ -56,7 +56,9 @@ namespace App
         {
             if (e.KeyCode == Keys.Enter)
             {
+                Console.WriteLine("enter pressed");
                 input2.Focus();
+                
             }
         }
 
@@ -67,6 +69,7 @@ namespace App
         {
             if (e.KeyCode == Keys.Enter)
             {
+                Console.WriteLine("enter pressed");
                 input3.Focus();
             }
         }
@@ -78,8 +81,10 @@ namespace App
         {
             if (e.KeyCode == Keys.Enter)
             {
-                addReadBox(listQT.SelectedIndex + 1, input1.Text, input2.Text, input3.Text);
+                Console.WriteLine("enter pressed");
+                PackingDB.Insert(listQT.SelectedIndex + 1, input1.Text, input2.Text, input3.Text);
                 resetInput();
+                updateTable();
             }
 
         }
@@ -99,13 +104,14 @@ namespace App
         //
         //  Add Input values to Read Box
         //
-        private void addReadBox(int QT, string orderNumber, string ID, string trackingNumber)
+        private void addReadBox(string readIndex, string QT, string orderNumber, string ID, string trackingNumber, string timeIn)
         {
             if (ID == "1333")
             {
                 ID = "Sashko";
             }
-            string[] data = { QT.ToString(), orderNumber.ToString(), ID.ToString(), trackingNumber.ToString() };
+            string[] data = { readIndex.ToString(), QT.ToString(), orderNumber.ToString(),
+                ID.ToString(), trackingNumber.ToString(), timeIn.ToString() };
             readBox.Rows.Add(data);
         }
 
@@ -128,45 +134,7 @@ namespace App
             //Console.WriteLine(readBox.CurrentCell.RowIndex.ToString);
         }
 
-        //
-        //  Connect to Database
-        //
-        private void createDB()
-        {
-            String str;
-            SqlConnection myConn = new SqlConnection("Server=localhost;Integrated security=SSPI;database=master");
-
-            str = "CREATE DATABASE MyDatabase ON PRIMARY " +
-        "(NAME = MyDatabase_Data, " +
-        "FILENAME = 'C:\\MyDatabaseData.mdf', " +
-        "SIZE = 2MB, MAXSIZE = 10MB, FILEGROWTH = 10%) " +
-        "LOG ON (NAME = MyDatabase_Log, " +
-        "FILENAME = 'C:\\MyDatabaseLog.ldf', " +
-        "SIZE = 1MB, " +
-        "MAXSIZE = 5MB, " +
-        "FILEGROWTH = 10%)";
-
-
-            SqlCommand myCommand = new SqlCommand(str, myConn);
-            try
-            {
-                myConn.Open();
-                myCommand.ExecuteNonQuery();
-                MessageBox.Show("DataBase is Created Successfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            finally
-            {
-                if (myConn.State == ConnectionState.Open)
-                {
-                    myConn.Close();
-                }
-            }
-        }
-
+        
 
         //
         //  Delete Button
@@ -175,5 +143,60 @@ namespace App
         {
 
         }
+
+        
+
+        
+
+        
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+            //Console.WriteLine();
+            //Insert();
+            //CloseConnection();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine();
+        }
+
+        private void addTable()
+        {
+            int countNum = PackingDB.Count();
+            for (int i = 0; i < countNum; i++)
+            {
+                addReadBox(PackingDB.Select()[0][i], PackingDB.Select()[1][i], PackingDB.Select()[2][i],
+                    PackingDB.Select()[3][i], PackingDB.Select()[4][i], PackingDB.Select()[5][i]);
+            }
+        }
+
+        private void updateTable()
+        {
+            readBox.Rows.Clear();
+            addTable();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void input1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+            statusOrder();
+        }
+        private void statusOrder()
+        {
+            lblStatusOrder.Text = PackingDB.statusOrder(inputOrderStatus.Text.ToString());
+        }
+        
     }
 }
