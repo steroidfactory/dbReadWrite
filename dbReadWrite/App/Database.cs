@@ -14,6 +14,8 @@ namespace App
         private string database;
         private string uid;
         private string password;
+        private string tableOrders;
+        private string tableInventory;
 
 
         public void initDB()
@@ -29,15 +31,15 @@ namespace App
         private void setDB()
         {
             server = "localhost";
-            database = "test";
+            database = "packing";
             uid = "root";
             password = "test";
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";" + "Convert Zero Datetime=True;";
-
             connection = new MySqlConnection(connectionString);
-            Console.WriteLine("mySQL Database initiated");
+            tableOrders = "orders";
+            tableInventory = "inventory";
         }
 
 
@@ -89,21 +91,21 @@ namespace App
 
 
         //Insert statement
-        public void Insert(int QT, string OrderNumber, string ID, string TrackingNumber)
+        public void Insert(int QT, string OrderNumber, string Employee, string TrackingNumber)
         {
 
             string query = "";
             if (TrackingNumber == "")
             {
-                //"INSERT INTO packing (QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
-                query = "INSERT INTO packing (QT, OrderNumber, ID, TimeIn)" +
-                    " VALUES(" + "'" + QT + "'" + "," + "'" + OrderNumber + "'" + "," + "'" + ID + "'" + "," + "now());";
+                //"INSERT INTO orders (QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
+                query = "INSERT INTO " + tableOrders + " (QT, OrderNumber, Employee, TimeIn)" +
+                    " VALUES(" + "'" + QT + "'" + "," + "'" + OrderNumber + "'" + "," + "'" + Employee + "'" + "," + "now());";
             }
             else
             {
-                //"INSERT INTO packing (QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
-                query = "INSERT INTO packing (QT, OrderNumber, ID, TrackingNumber, TimeIn)" +
-                    " VALUES(" + "'" + QT + "'" + "," + "'" + OrderNumber + "'" + "," + "'" + ID + "'" + "," + "'" + TrackingNumber + "'" + "," + "now());";
+                //"INSERT INTO orders (QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
+                query = "INSERT INTO " + tableOrders + " (QT, OrderNumber, Employee, TrackingNumber, TimeIn)" +
+                    " VALUES(" + "'" + QT + "'" + "," + "'" + OrderNumber + "'" + "," + "'" + Employee + "'" + "," + "'" + TrackingNumber + "'" + "," + "now());";
             }
             //open connection
             if (this.OpenConnection() == true)
@@ -128,7 +130,7 @@ namespace App
         //Select statement
         public List<string>[] Select()
         {
-            string query = "SELECT * FROM packing";
+            string query = "SELECT * FROM " + tableOrders + ";";
             //int countNum = Count();
             //Create a list to store the result
             List<string>[] list = new List<string>[6];
@@ -157,10 +159,10 @@ namespace App
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
-                    list[0].Add(dataReader["Index_ID"] + "");
+                    list[0].Add(dataReader["ID"] + "");
                     list[1].Add(dataReader["QT"] + "");
                     list[2].Add(dataReader["OrderNumber"] + "");
-                    list[3].Add(dataReader["ID"] + "");
+                    list[3].Add(dataReader["Employee"] + "");
                     list[4].Add(dataReader["TrackingNumber"] + "");
                     list[5].Add(dataReader["TimeIn"] + "");
                     //Console.WriteLine(dataReader["Index_ID"].ToString() + dataReader["QT"] + dataReader["OrderNumber"]
@@ -186,7 +188,7 @@ namespace App
         //Count statement
         public int Count()
         {
-            string query = "SELECT Count(*) FROM packing";
+            string query = "SELECT Count(*) FROM " + tableOrders + ";";
             int Count = -1;
 
             //Open Connection
@@ -215,7 +217,7 @@ namespace App
             {
                 return "";
             }
-                string query = ("SELECT * FROM packing WHERE OrderNumber = " + order +  ";");
+                string query = ("SELECT * FROM " + tableOrders + " WHERE OrderNumber = " + order +  ";");
             string status = null;
             bool timeIn = false;
             bool timeOut = false;
@@ -283,7 +285,7 @@ namespace App
             int differenceInHours = ts.Hours;
             // Difference in Minutes.
             int differenceInMinutes = ts.Minutes;
-            return ("Open For " + differenceInDays + "Days, " + differenceInHours + " hours, and " + differenceInMinutes + " minutes");
+            return ("Open For " + differenceInDays + " Days, " + differenceInHours + " hours, and " + differenceInMinutes + " minutes");
         }
 
     }
