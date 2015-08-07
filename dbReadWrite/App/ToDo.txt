@@ -1,0 +1,26 @@
+﻿
+*ReadBox
+	Reverse the add order
+	Remove seconds from time stamp
+	Change years to 2 digits in time stamp
+	Add column for dimensions
+
+*Input
+	Add input selection for dimensions
+
+*Check Order
+	Add output text for "Closed Order"
+		ID
+		TimeIn
+		TimeOut
+		TimeCalc
+
+*Design
+	Change dimensions of "Order Status"
+	Add button for "Update Tracking Number"
+	--Create tab system
+	--Create new page for inventory
+
+*Database
+	--Add new table for inventory
+	Add new row "TimeUpdate" for packing

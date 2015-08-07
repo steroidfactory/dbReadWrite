@@ -91,22 +91,38 @@ namespace App
         //Insert statement
         public void Insert(int QT, string OrderNumber, string ID, string TrackingNumber)
         {
-            //"INSERT INTO packing (QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
-            string query = "INSERT INTO packing (QT, OrderNumber, ID, TrackingNumber, TimeIn)" +
-                " VALUES(" + "'" + QT + "'" + "," + "'" + OrderNumber + "'" + "," + "'" + ID  + "'" + "," + "'" + TrackingNumber + "'" + "," + "now());";
 
+            string query = "";
+            if (TrackingNumber == "")
+            {
+                //"INSERT INTO packing (QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
+                query = "INSERT INTO packing (QT, OrderNumber, ID, TimeIn)" +
+                    " VALUES(" + "'" + QT + "'" + "," + "'" + OrderNumber + "'" + "," + "'" + ID + "'" + "," + "now());";
+            }
+            else
+            {
+                //"INSERT INTO packing (QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
+                query = "INSERT INTO packing (QT, OrderNumber, ID, TrackingNumber, TimeIn)" +
+                    " VALUES(" + "'" + QT + "'" + "," + "'" + OrderNumber + "'" + "," + "'" + ID + "'" + "," + "'" + TrackingNumber + "'" + "," + "now());";
+            }
             //open connection
             if (this.OpenConnection() == true)
             {
-                //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                try
+                {
+                    //create command and assign the query and connection from the constructor
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
 
-                //Execute command
-                cmd.ExecuteNonQuery();
+                    //Execute command
+                    cmd.ExecuteNonQuery();
 
-                //close connection
-                this.CloseConnection();
+                    //close connection
+                    this.CloseConnection();
+                }
+                catch { }
+
             }
+            
         }
 
         //Select statement
@@ -195,7 +211,11 @@ namespace App
 
         public string statusOrder(string order)
         {
-            string query = ("SELECT * FROM packing WHERE OrderNumber = " + order +  ";");
+            if ((string.IsNullOrEmpty(order)))
+            {
+                return "";
+            }
+                string query = ("SELECT * FROM packing WHERE OrderNumber = " + order +  ";");
             string status = null;
             bool timeIn = false;
             bool timeOut = false;
@@ -263,8 +283,7 @@ namespace App
             int differenceInHours = ts.Hours;
             // Difference in Minutes.
             int differenceInMinutes = ts.Minutes;
-            Console.WriteLine(newDate);
-            return ("Open For " + differenceInDays + " Days, " + differenceInHours + " hours, and " + differenceInMinutes + " minutes");
+            return ("Open For " + differenceInDays + "Days, " + differenceInHours + " hours, and " + differenceInMinutes + " minutes");
         }
 
     }

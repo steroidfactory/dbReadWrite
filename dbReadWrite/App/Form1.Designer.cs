@@ -43,6 +43,7 @@
             this.inputOrderStatus = new System.Windows.Forms.TextBox();
             this.btnCheckOrder = new System.Windows.Forms.Button();
             this.lblStatusOrder = new System.Windows.Forms.Label();
+            this.lblOrderStatusNumber = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panelInput = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -54,7 +55,6 @@
             this.input2 = new System.Windows.Forms.TextBox();
             this.input1 = new System.Windows.Forms.TextBox();
             this.listQT = new System.Windows.Forms.ComboBox();
-            this.lblOrderStatusNumber = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.readBox)).BeginInit();
             this.panelReadBox.SuspendLayout();
             this.panelOrderStatus.SuspendLayout();
@@ -194,7 +194,6 @@
             this.inputOrderStatus.Name = "inputOrderStatus";
             this.inputOrderStatus.Size = new System.Drawing.Size(93, 20);
             this.inputOrderStatus.TabIndex = 19;
-            this.inputOrderStatus.Text = "";
             this.inputOrderStatus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputOrderStatus_KeyDown);
             // 
             // btnCheckOrder
@@ -215,6 +214,15 @@
             this.lblStatusOrder.Name = "lblStatusOrder";
             this.lblStatusOrder.Size = new System.Drawing.Size(0, 17);
             this.lblStatusOrder.TabIndex = 21;
+            // 
+            // lblOrderStatusNumber
+            // 
+            this.lblOrderStatusNumber.AutoSize = true;
+            this.lblOrderStatusNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lblOrderStatusNumber.Location = new System.Drawing.Point(3, 39);
+            this.lblOrderStatusNumber.Name = "lblOrderStatusNumber";
+            this.lblOrderStatusNumber.Size = new System.Drawing.Size(0, 17);
+            this.lblOrderStatusNumber.TabIndex = 22;
             // 
             // label5
             // 
@@ -345,15 +353,6 @@
             this.listQT.Size = new System.Drawing.Size(42, 21);
             this.listQT.TabIndex = 4;
             this.listQT.SelectedIndexChanged += new System.EventHandler(this.listQT_SelectedIndexChanged);
-            // 
-            // lblOrderStatusNumber
-            // 
-            this.lblOrderStatusNumber.AutoSize = true;
-            this.lblOrderStatusNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblOrderStatusNumber.Location = new System.Drawing.Point(3, 39);
-            this.lblOrderStatusNumber.Name = "lblOrderStatusNumber";
-            this.lblOrderStatusNumber.Size = new System.Drawing.Size(0, 17);
-            this.lblOrderStatusNumber.TabIndex = 22;
             // 
             // Form1
             // 
