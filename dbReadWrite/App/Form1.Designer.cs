@@ -54,7 +54,7 @@
             this.input2 = new System.Windows.Forms.TextBox();
             this.input1 = new System.Windows.Forms.TextBox();
             this.listQT = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblOrderStatusNumber = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.readBox)).BeginInit();
             this.panelReadBox.SuspendLayout();
             this.panelOrderStatus.SuspendLayout();
@@ -87,7 +87,7 @@
             this.readBox.Name = "readBox";
             this.readBox.ReadOnly = true;
             this.readBox.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.readBox.Size = new System.Drawing.Size(727, 386);
+            this.readBox.Size = new System.Drawing.Size(915, 386);
             this.readBox.StandardTab = true;
             this.readBox.TabIndex = 11;
             this.readBox.TabStop = false;
@@ -147,7 +147,7 @@
             this.panelReadBox.Controls.Add(this.readBox);
             this.panelReadBox.Location = new System.Drawing.Point(23, 220);
             this.panelReadBox.Name = "panelReadBox";
-            this.panelReadBox.Size = new System.Drawing.Size(729, 388);
+            this.panelReadBox.Size = new System.Drawing.Size(917, 388);
             this.panelReadBox.TabIndex = 12;
             // 
             // panelOrderStatus
@@ -157,7 +157,7 @@
             this.panelOrderStatus.Controls.Add(this.tableLayoutPanel2);
             this.panelOrderStatus.Location = new System.Drawing.Point(552, 27);
             this.panelOrderStatus.Name = "panelOrderStatus";
-            this.panelOrderStatus.Size = new System.Drawing.Size(200, 152);
+            this.panelOrderStatus.Size = new System.Drawing.Size(389, 152);
             this.panelOrderStatus.TabIndex = 13;
             // 
             // label6
@@ -173,19 +173,19 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.76389F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.23611F));
             this.tableLayoutPanel2.Controls.Add(this.inputOrderStatus, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnCheckOrder, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblStatusOrder, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.lblOrderStatusNumber, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 71);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(198, 79);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(387, 79);
             this.tableLayoutPanel2.TabIndex = 16;
             // 
             // inputOrderStatus
@@ -194,12 +194,14 @@
             this.inputOrderStatus.Name = "inputOrderStatus";
             this.inputOrderStatus.Size = new System.Drawing.Size(93, 20);
             this.inputOrderStatus.TabIndex = 19;
+            this.inputOrderStatus.Text = "";
+            this.inputOrderStatus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputOrderStatus_KeyDown);
             // 
             // btnCheckOrder
             // 
-            this.btnCheckOrder.Location = new System.Drawing.Point(102, 3);
+            this.btnCheckOrder.Location = new System.Drawing.Point(141, 3);
             this.btnCheckOrder.Name = "btnCheckOrder";
-            this.btnCheckOrder.Size = new System.Drawing.Size(75, 33);
+            this.btnCheckOrder.Size = new System.Drawing.Size(179, 33);
             this.btnCheckOrder.TabIndex = 20;
             this.btnCheckOrder.Text = "Check Order";
             this.btnCheckOrder.UseVisualStyleBackColor = true;
@@ -209,7 +211,7 @@
             // 
             this.lblStatusOrder.AutoSize = true;
             this.lblStatusOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblStatusOrder.Location = new System.Drawing.Point(102, 39);
+            this.lblStatusOrder.Location = new System.Drawing.Point(141, 39);
             this.lblStatusOrder.Name = "lblStatusOrder";
             this.lblStatusOrder.Size = new System.Drawing.Size(0, 17);
             this.lblStatusOrder.TabIndex = 21;
@@ -344,15 +346,14 @@
             this.listQT.TabIndex = 4;
             this.listQT.SelectedIndexChanged += new System.EventHandler(this.listQT_SelectedIndexChanged);
             // 
-            // label7
+            // lblOrderStatusNumber
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label7.Location = new System.Drawing.Point(3, 39);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(93, 17);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "Order Status:";
+            this.lblOrderStatusNumber.AutoSize = true;
+            this.lblOrderStatusNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lblOrderStatusNumber.Location = new System.Drawing.Point(3, 39);
+            this.lblOrderStatusNumber.Name = "lblOrderStatusNumber";
+            this.lblOrderStatusNumber.Size = new System.Drawing.Size(0, 17);
+            this.lblOrderStatusNumber.TabIndex = 22;
             // 
             // Form1
             // 
@@ -408,7 +409,7 @@
         private System.Windows.Forms.TextBox input2;
         private System.Windows.Forms.TextBox input1;
         private System.Windows.Forms.ComboBox listQT;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblOrderStatusNumber;
     }
 }
 

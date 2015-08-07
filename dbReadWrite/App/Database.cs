@@ -34,7 +34,7 @@ namespace App
             password = "test";
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";" + "Convert Zero Datetime=True;";
 
             connection = new MySqlConnection(connectionString);
             Console.WriteLine("mySQL Database initiated");
@@ -197,14 +197,15 @@ namespace App
         {
             string query = ("SELECT * FROM packing WHERE OrderNumber = " + order +  ";");
             string status = null;
-            string timeIn = null;
-            string timeOut = null;
-
+            bool timeIn = false;
+            bool timeOut = false;
+            DateTime calcIn = DateTime.MinValue;
 
             //Open Connection
             if (this.OpenConnection() == true)
             {
-                
+                timeIn = false;
+                timeOut = false;
                 //Create Mysql Command
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 //Create a data reader and Execute the command
@@ -213,19 +214,28 @@ namespace App
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
-                    timeIn = (dataReader["TimeIn"] + "");
-                    timeOut = dataReader["TimeOut"] + "";
+                    if ((dataReader["TimeIn"].ToString()) != "")
+                    {
+                        timeIn = true;
+                        calcIn = DateTime.Parse(dataReader["TimeIn"].ToString());
+                    }
+                    if ((dataReader["TimeOut"].ToString()) != "")
+                    {
+                        timeOut = true;
+                    }
+                    
                 }
-                
-                if (timeIn != null && timeOut == null)
+                Console.WriteLine(calcIn);
+                if (timeIn == true && timeOut == false)
                 {
-                    status = "Order Open";
+                    status = "Order Open for: " + calcTime(calcIn);
+                    
                 }
-                if(timeIn == null && timeOut == null)
+                if(timeIn == false && timeOut == false)
                 {
                     status = "Order does not exist";
                 }
-                if (timeIn != null && timeOut != null)
+                if (timeIn == true && timeOut == true)
                 {
                     status = "Order Closed";
                 }
@@ -239,6 +249,22 @@ namespace App
             {
                 return "Connection closed";
             }
+        }
+
+        public string calcTime(DateTime started)
+        {
+            DateTime newDate = DateTime.Now;
+
+            // Difference in days, hours, and minutes.
+            TimeSpan ts = newDate - started;
+            // Difference in days.
+            int differenceInDays = ts.Days;
+            // Difference in days.
+            int differenceInHours = ts.Hours;
+            // Difference in Minutes.
+            int differenceInMinutes = ts.Minutes;
+            Console.WriteLine(newDate);
+            return ("Open For " + differenceInDays + " Days, " + differenceInHours + " hours, and " + differenceInMinutes + " minutes");
         }
 
     }

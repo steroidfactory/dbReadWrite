@@ -191,12 +191,30 @@ namespace App
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
-            statusOrder();
+            checkOrder();
         }
         private void statusOrder()
         {
             lblStatusOrder.Text = PackingDB.statusOrder(inputOrderStatus.Text.ToString());
         }
-        
+        private void statusOrderNumber()
+        {
+            lblOrderStatusNumber.Text = "Order: " + inputOrderStatus.Text;
+        }
+
+        private void inputOrderStatus_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                checkOrder();
+            }
+        }
+
+        private void checkOrder()
+        {
+            statusOrder();
+            statusOrderNumber();
+            inputOrderStatus.Clear();
+        }
     }
 }
