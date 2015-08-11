@@ -104,13 +104,13 @@ namespace App
         //
         //  Add Input values to Read Box
         //
-        private void addReadBox(string readIndex, string QT, string orderNumber, string ID, string trackingNumber, string timeIn)
+        private void addReadBox(string QT, string orderNumber, string ID, string trackingNumber, string timeIn)
         {
             if (ID == "1333")
             {
                 ID = "Sashko";
             }
-            string[] data = { readIndex.ToString(), QT.ToString(), orderNumber.ToString(),
+            string[] data = { QT.ToString(), orderNumber.ToString(),
                 ID.ToString(), trackingNumber.ToString(), timeIn.ToString() };
             readBox.Rows.Add(data);
         }
@@ -169,7 +169,7 @@ namespace App
             for (int i = 0; i < countNum; i++)
             {
                 addReadBox(PackingDB.Select()[0][i], PackingDB.Select()[1][i], PackingDB.Select()[2][i],
-                    PackingDB.Select()[3][i], PackingDB.Select()[4][i], PackingDB.Select()[5][i]);
+                    PackingDB.Select()[3][i], PackingDB.Select()[4][i]);
             }
         }
 

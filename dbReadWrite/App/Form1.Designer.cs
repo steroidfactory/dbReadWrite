@@ -29,13 +29,6 @@
         private void InitializeComponent()
         {
             this.readBox = new System.Windows.Forms.DataGridView();
-            this.readIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readQT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readOrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readTrackingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readTimeIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readTimeActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelReadBox = new System.Windows.Forms.Panel();
             this.panelOrderStatus = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
@@ -55,6 +48,15 @@
             this.input2 = new System.Windows.Forms.TextBox();
             this.input1 = new System.Windows.Forms.TextBox();
             this.listQT = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.listDM = new System.Windows.Forms.ComboBox();
+            this.readDM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readQT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readOrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readTrackingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readTimeIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readTimeActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.readBox)).BeginInit();
             this.panelReadBox.SuspendLayout();
             this.panelOrderStatus.SuspendLayout();
@@ -71,7 +73,7 @@
             this.readBox.AllowUserToResizeRows = false;
             this.readBox.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.readBox.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.readIndex,
+            this.readDM,
             this.readQT,
             this.readOrderNumber,
             this.readID,
@@ -93,54 +95,6 @@
             this.readBox.TabStop = false;
             this.readBox.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.readBox_CellMouseClick);
             // 
-            // readIndex
-            // 
-            this.readIndex.HeaderText = "Index";
-            this.readIndex.Name = "readIndex";
-            this.readIndex.ReadOnly = true;
-            this.readIndex.Width = 76;
-            // 
-            // readQT
-            // 
-            this.readQT.HeaderText = "QT";
-            this.readQT.Name = "readQT";
-            this.readQT.ReadOnly = true;
-            this.readQT.Width = 77;
-            // 
-            // readOrderNumber
-            // 
-            this.readOrderNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.readOrderNumber.HeaderText = "Order Number";
-            this.readOrderNumber.Name = "readOrderNumber";
-            this.readOrderNumber.ReadOnly = true;
-            // 
-            // readID
-            // 
-            this.readID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.readID.HeaderText = "Employee ID";
-            this.readID.Name = "readID";
-            this.readID.ReadOnly = true;
-            // 
-            // readTrackingNumber
-            // 
-            this.readTrackingNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.readTrackingNumber.HeaderText = "Tracking Number";
-            this.readTrackingNumber.Name = "readTrackingNumber";
-            this.readTrackingNumber.ReadOnly = true;
-            // 
-            // readTimeIn
-            // 
-            this.readTimeIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.readTimeIn.HeaderText = "TimeIn";
-            this.readTimeIn.Name = "readTimeIn";
-            this.readTimeIn.ReadOnly = true;
-            // 
-            // readTimeActive
-            // 
-            this.readTimeActive.HeaderText = "Time Active";
-            this.readTimeActive.Name = "readTimeActive";
-            this.readTimeActive.ReadOnly = true;
-            // 
             // panelReadBox
             // 
             this.panelReadBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -155,7 +109,7 @@
             this.panelOrderStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelOrderStatus.Controls.Add(this.label6);
             this.panelOrderStatus.Controls.Add(this.tableLayoutPanel2);
-            this.panelOrderStatus.Location = new System.Drawing.Point(552, 27);
+            this.panelOrderStatus.Location = new System.Drawing.Point(617, 27);
             this.panelOrderStatus.Name = "panelOrderStatus";
             this.panelOrderStatus.Size = new System.Drawing.Size(389, 152);
             this.panelOrderStatus.TabIndex = 13;
@@ -247,19 +201,22 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.651944F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.24832F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.24832F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.85142F));
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.input3, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.input2, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.input1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listQT, 0, 1);
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.049567F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.778484F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.60147F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.60147F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.969F));
+            this.tableLayoutPanel1.Controls.Add(this.listDM, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.input3, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.input2, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.input1, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.listQT, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 65);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -274,9 +231,9 @@
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Location = new System.Drawing.Point(48, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 48);
+            this.label4.Size = new System.Drawing.Size(38, 48);
             this.label4.TabIndex = 5;
             this.label4.Text = "QT";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -286,9 +243,9 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(345, 0);
+            this.label3.Location = new System.Drawing.Point(358, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(155, 48);
+            this.label3.Size = new System.Drawing.Size(142, 48);
             this.label3.TabIndex = 0;
             this.label3.Text = "Tracking Number";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -298,9 +255,9 @@
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(198, 0);
+            this.label2.Location = new System.Drawing.Point(225, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(141, 48);
+            this.label2.Size = new System.Drawing.Size(127, 48);
             this.label2.TabIndex = 0;
             this.label2.Text = "Employee ID";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -310,9 +267,9 @@
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(51, 0);
+            this.label1.Location = new System.Drawing.Point(92, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(141, 48);
+            this.label1.Size = new System.Drawing.Size(127, 48);
             this.label1.TabIndex = 0;
             this.label1.Text = "Order Number";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -320,27 +277,27 @@
             // input3
             // 
             this.input3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.input3.Location = new System.Drawing.Point(345, 51);
+            this.input3.Location = new System.Drawing.Point(358, 51);
             this.input3.Name = "input3";
-            this.input3.Size = new System.Drawing.Size(155, 20);
+            this.input3.Size = new System.Drawing.Size(142, 20);
             this.input3.TabIndex = 3;
             this.input3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input3_KeyDown);
             // 
             // input2
             // 
             this.input2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.input2.Location = new System.Drawing.Point(198, 51);
+            this.input2.Location = new System.Drawing.Point(225, 51);
             this.input2.Name = "input2";
-            this.input2.Size = new System.Drawing.Size(141, 20);
+            this.input2.Size = new System.Drawing.Size(127, 20);
             this.input2.TabIndex = 2;
             this.input2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input2_KeyDown);
             // 
             // input1
             // 
             this.input1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.input1.Location = new System.Drawing.Point(51, 51);
+            this.input1.Location = new System.Drawing.Point(92, 51);
             this.input1.Name = "input1";
-            this.input1.Size = new System.Drawing.Size(141, 20);
+            this.input1.Size = new System.Drawing.Size(127, 20);
             this.input1.TabIndex = 1;
             this.input1.TextChanged += new System.EventHandler(this.input1_TextChanged);
             this.input1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input1_KeyDown);
@@ -348,11 +305,78 @@
             // listQT
             // 
             this.listQT.FormattingEnabled = true;
-            this.listQT.Location = new System.Drawing.Point(3, 51);
+            this.listQT.Location = new System.Drawing.Point(48, 51);
             this.listQT.Name = "listQT";
-            this.listQT.Size = new System.Drawing.Size(42, 21);
+            this.listQT.Size = new System.Drawing.Size(38, 21);
             this.listQT.TabIndex = 4;
             this.listQT.SelectedIndexChanged += new System.EventHandler(this.listQT_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(3, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(39, 48);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "DM";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // listDM
+            // 
+            this.listDM.FormattingEnabled = true;
+            this.listDM.Location = new System.Drawing.Point(3, 51);
+            this.listDM.Name = "listDM";
+            this.listDM.Size = new System.Drawing.Size(38, 21);
+            this.listDM.TabIndex = 7;
+            // 
+            // readDM
+            // 
+            this.readDM.HeaderText = "DM";
+            this.readDM.Name = "readDM";
+            this.readDM.ReadOnly = true;
+            // 
+            // readQT
+            // 
+            this.readQT.HeaderText = "QT";
+            this.readQT.Name = "readQT";
+            this.readQT.ReadOnly = true;
+            this.readQT.Width = 77;
+            // 
+            // readOrderNumber
+            // 
+            this.readOrderNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.readOrderNumber.HeaderText = "Order Number";
+            this.readOrderNumber.Name = "readOrderNumber";
+            this.readOrderNumber.ReadOnly = true;
+            // 
+            // readID
+            // 
+            this.readID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.readID.HeaderText = "Employee ID";
+            this.readID.Name = "readID";
+            this.readID.ReadOnly = true;
+            // 
+            // readTrackingNumber
+            // 
+            this.readTrackingNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.readTrackingNumber.HeaderText = "Tracking Number";
+            this.readTrackingNumber.Name = "readTrackingNumber";
+            this.readTrackingNumber.ReadOnly = true;
+            // 
+            // readTimeIn
+            // 
+            this.readTimeIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.readTimeIn.HeaderText = "TimeIn";
+            this.readTimeIn.Name = "readTimeIn";
+            this.readTimeIn.ReadOnly = true;
+            // 
+            // readTimeActive
+            // 
+            this.readTimeActive.HeaderText = "Time Active";
+            this.readTimeActive.Name = "readTimeActive";
+            this.readTimeActive.ReadOnly = true;
             // 
             // Form1
             // 
@@ -384,13 +408,6 @@
         #endregion
         private System.Windows.Forms.DataGridView readBox;
         private System.Windows.Forms.Panel panelReadBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn readIndex;
-        private System.Windows.Forms.DataGridViewTextBoxColumn readQT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn readOrderNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn readID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn readTrackingNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn readTimeIn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn readTimeActive;
         private System.Windows.Forms.Panel panelOrderStatus;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -409,6 +426,15 @@
         private System.Windows.Forms.TextBox input1;
         private System.Windows.Forms.ComboBox listQT;
         private System.Windows.Forms.Label lblOrderStatusNumber;
+        private System.Windows.Forms.ComboBox listDM;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn readDM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn readQT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn readOrderNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn readID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn readTrackingNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn readTimeIn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn readTimeActive;
     }
 }
 

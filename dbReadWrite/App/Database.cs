@@ -30,10 +30,10 @@ namespace App
         //
         private void setDB()
         {
-            server = "localhost";
+            server = "10.11.3.3";
             database = "packing";
-            uid = "root";
-            password = "test";
+            uid = "steroid";
+            password = "andriyk";
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";" + "Convert Zero Datetime=True;";
@@ -49,6 +49,7 @@ namespace App
         {
             try
             {
+
                 connection.Open();
                 return true;
             }
@@ -141,7 +142,6 @@ namespace App
             list[2] = new List<string>();
             list[3] = new List<string>();
             list[4] = new List<string>();
-            list[5] = new List<string>();
             //}
 
 
@@ -159,12 +159,11 @@ namespace App
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
-                    list[0].Add(dataReader["ID"] + "");
-                    list[1].Add(dataReader["QT"] + "");
-                    list[2].Add(dataReader["OrderNumber"] + "");
-                    list[3].Add(dataReader["Employee"] + "");
-                    list[4].Add(dataReader["TrackingNumber"] + "");
-                    list[5].Add(dataReader["TimeIn"] + "");
+                    list[0].Add(dataReader["QT"] + "");
+                    list[1].Add(dataReader["OrderNumber"] + "");
+                    list[2].Add(dataReader["Employee"] + "");
+                    list[3].Add(dataReader["TrackingNumber"] + "");
+                    list[4].Add(dataReader["TimeIn"] + "");
                     //Console.WriteLine(dataReader["Index_ID"].ToString() + dataReader["QT"] + dataReader["OrderNumber"]
                     //+ dataReader["ID"] + dataReader["TrackingNumber"] + dataReader["TimeIn"] );
                 }
