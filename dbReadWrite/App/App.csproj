@@ -54,10 +54,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>B332F90662E6EF7E79E9A43AD976D0DB85F6FFA9</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>1823E1F89B069DF4CA76B2A665CEC49189602B94</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>App_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>App_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -114,6 +114,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="App_1_TemporaryKey.pfx" />
     <None Include="App_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

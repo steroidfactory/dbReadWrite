@@ -49,7 +49,6 @@ namespace App
         {
             try
             {
-
                 connection.Open();
                 return true;
             }
@@ -92,23 +91,24 @@ namespace App
 
 
         //Insert statement
-        public void Insert(int QT, string OrderNumber, string Employee, string TrackingNumber)
+        public void Insert(string Dimensions, int QT, string OrderNumber, string Employee, string TrackingNumber)
         {
 
             string query = "";
-            if (TrackingNumber == "")
-            {
-                //"INSERT INTO orders (QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
-                query = "INSERT INTO " + tableOrders + " (QT, OrderNumber, Employee, TimeIn)" +
-                    " VALUES(" + "'" + QT + "'" + "," + "'" + OrderNumber + "'" + "," + "'" + Employee + "'" + "," + "now());";
-            }
-            else
-            {
-                //"INSERT INTO orders (QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
-                query = "INSERT INTO " + tableOrders + " (QT, OrderNumber, Employee, TrackingNumber, TimeIn)" +
-                    " VALUES(" + "'" + QT + "'" + "," + "'" + OrderNumber + "'" + "," + "'" + Employee + "'" + "," + "'" + TrackingNumber + "'" + "," + "now());";
-            }
+                if (TrackingNumber == "")
+                {
+                    //"INSERT INTO orders (Dimensions, QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
+                    query = "INSERT INTO " + tableOrders + " (OrderNumber, Dimensions, QT, Employee, TimeIn)" +
+                        " VALUES(" + OrderNumber + "," + "'" +  Dimensions + "'" + "," + "'" + QT + "'" + "," + "'" + Employee + "'" + "," + "now());";
+                }
+                else
+                {
+                //"INSERT INTO orders (Dimensions, QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
+                    query = "INSERT INTO " + tableOrders + " (OrderNumber, Dimensions, QT, Employee, TrackingNumber, TimeIn)" +
+                " VALUES(" + OrderNumber + ',' + "'" + Dimensions + "'" + "," + "'" + QT + "'" + "," + "'" + Employee + "'" + "," + "'" + TrackingNumber + "'" + "," + "now());";
+                }
             //open connection
+
             if (this.OpenConnection() == true)
             {
                 try
@@ -122,7 +122,10 @@ namespace App
                     //close connection
                     this.CloseConnection();
                 }
-                catch { }
+                catch (MySqlException s)
+                {
+                    Console.WriteLine(s);
+                }
 
             }
             
@@ -134,7 +137,7 @@ namespace App
             string query = "SELECT * FROM " + tableOrders + ";";
             //int countNum = Count();
             //Create a list to store the result
-            List<string>[] list = new List<string>[6];
+            List<string>[] list = new List<string>[7];
             //for (int i = 0; i<=4; i++)
             //{
             list[0] = new List<string>();
@@ -142,6 +145,7 @@ namespace App
             list[2] = new List<string>();
             list[3] = new List<string>();
             list[4] = new List<string>();
+            list[5] = new List<string>();
             //}
 
 
@@ -159,11 +163,12 @@ namespace App
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
-                    list[0].Add(dataReader["QT"] + "");
-                    list[1].Add(dataReader["OrderNumber"] + "");
-                    list[2].Add(dataReader["Employee"] + "");
-                    list[3].Add(dataReader["TrackingNumber"] + "");
-                    list[4].Add(dataReader["TimeIn"] + "");
+                    list[0].Add(dataReader["Dimensions"] + "");
+                    list[1].Add(dataReader["QT"] + "");
+                    list[2].Add(dataReader["OrderNumber"] + "");
+                    list[3].Add(dataReader["Employee"] + "");
+                    list[4].Add(dataReader["TrackingNumber"] + "");
+                    list[5].Add(dataReader["TimeIn"] + "");
                     //Console.WriteLine(dataReader["Index_ID"].ToString() + dataReader["QT"] + dataReader["OrderNumber"]
                     //+ dataReader["ID"] + dataReader["TrackingNumber"] + dataReader["TimeIn"] );
                 }
@@ -216,7 +221,7 @@ namespace App
             {
                 return "";
             }
-                string query = ("SELECT * FROM " + tableOrders + " WHERE OrderNumber = " + order +  ";");
+            string query = ("SELECT * FROM " + tableOrders + " WHERE OrderNumber = " + order +  ";");
             string status = null;
             bool timeIn = false;
             bool timeOut = false;

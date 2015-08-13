@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.readBox = new System.Windows.Forms.DataGridView();
+            this.readDM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readQT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readOrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readTrackingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readTimeIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelReadBox = new System.Windows.Forms.Panel();
             this.panelOrderStatus = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
@@ -40,6 +46,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panelInput = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.listDM = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,14 +56,6 @@
             this.input1 = new System.Windows.Forms.TextBox();
             this.listQT = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.listDM = new System.Windows.Forms.ComboBox();
-            this.readDM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readQT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readOrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readTrackingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readTimeIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readTimeActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.readBox)).BeginInit();
             this.panelReadBox.SuspendLayout();
             this.panelOrderStatus.SuspendLayout();
@@ -78,8 +77,7 @@
             this.readOrderNumber,
             this.readID,
             this.readTrackingNumber,
-            this.readTimeIn,
-            this.readTimeActive});
+            this.readTimeIn});
             this.readBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.readBox.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.readBox.GridColor = System.Drawing.SystemColors.HotTrack;
@@ -94,6 +92,47 @@
             this.readBox.TabIndex = 11;
             this.readBox.TabStop = false;
             this.readBox.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.readBox_CellMouseClick);
+            // 
+            // readDM
+            // 
+            this.readDM.HeaderText = "DM";
+            this.readDM.Name = "readDM";
+            this.readDM.ReadOnly = true;
+            // 
+            // readQT
+            // 
+            this.readQT.HeaderText = "QT";
+            this.readQT.Name = "readQT";
+            this.readQT.ReadOnly = true;
+            this.readQT.Width = 77;
+            // 
+            // readOrderNumber
+            // 
+            this.readOrderNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.readOrderNumber.HeaderText = "Order Number";
+            this.readOrderNumber.Name = "readOrderNumber";
+            this.readOrderNumber.ReadOnly = true;
+            // 
+            // readID
+            // 
+            this.readID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.readID.HeaderText = "Employee ID";
+            this.readID.Name = "readID";
+            this.readID.ReadOnly = true;
+            // 
+            // readTrackingNumber
+            // 
+            this.readTrackingNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.readTrackingNumber.HeaderText = "Tracking Number";
+            this.readTrackingNumber.Name = "readTrackingNumber";
+            this.readTrackingNumber.ReadOnly = true;
+            // 
+            // readTimeIn
+            // 
+            this.readTimeIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.readTimeIn.HeaderText = "TimeIn";
+            this.readTimeIn.Name = "readTimeIn";
+            this.readTimeIn.ReadOnly = true;
             // 
             // panelReadBox
             // 
@@ -226,6 +265,16 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(503, 85);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
+            // listDM
+            // 
+            this.listDM.FormattingEnabled = true;
+            this.listDM.Items.AddRange(new object[] {
+            "4x4x4"});
+            this.listDM.Location = new System.Drawing.Point(3, 51);
+            this.listDM.Name = "listDM";
+            this.listDM.Size = new System.Drawing.Size(38, 21);
+            this.listDM.TabIndex = 7;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -323,61 +372,6 @@
             this.label7.Text = "DM";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // listDM
-            // 
-            this.listDM.FormattingEnabled = true;
-            this.listDM.Location = new System.Drawing.Point(3, 51);
-            this.listDM.Name = "listDM";
-            this.listDM.Size = new System.Drawing.Size(38, 21);
-            this.listDM.TabIndex = 7;
-            // 
-            // readDM
-            // 
-            this.readDM.HeaderText = "DM";
-            this.readDM.Name = "readDM";
-            this.readDM.ReadOnly = true;
-            // 
-            // readQT
-            // 
-            this.readQT.HeaderText = "QT";
-            this.readQT.Name = "readQT";
-            this.readQT.ReadOnly = true;
-            this.readQT.Width = 77;
-            // 
-            // readOrderNumber
-            // 
-            this.readOrderNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.readOrderNumber.HeaderText = "Order Number";
-            this.readOrderNumber.Name = "readOrderNumber";
-            this.readOrderNumber.ReadOnly = true;
-            // 
-            // readID
-            // 
-            this.readID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.readID.HeaderText = "Employee ID";
-            this.readID.Name = "readID";
-            this.readID.ReadOnly = true;
-            // 
-            // readTrackingNumber
-            // 
-            this.readTrackingNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.readTrackingNumber.HeaderText = "Tracking Number";
-            this.readTrackingNumber.Name = "readTrackingNumber";
-            this.readTrackingNumber.ReadOnly = true;
-            // 
-            // readTimeIn
-            // 
-            this.readTimeIn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.readTimeIn.HeaderText = "TimeIn";
-            this.readTimeIn.Name = "readTimeIn";
-            this.readTimeIn.ReadOnly = true;
-            // 
-            // readTimeActive
-            // 
-            this.readTimeActive.HeaderText = "Time Active";
-            this.readTimeActive.Name = "readTimeActive";
-            this.readTimeActive.ReadOnly = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -434,7 +428,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn readID;
         private System.Windows.Forms.DataGridViewTextBoxColumn readTrackingNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn readTimeIn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn readTimeActive;
     }
 }
 

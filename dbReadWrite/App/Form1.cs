@@ -82,7 +82,7 @@ namespace App
             if (e.KeyCode == Keys.Enter)
             {
                 Console.WriteLine("enter pressed");
-                PackingDB.Insert(listQT.SelectedIndex + 1, input1.Text, input2.Text, input3.Text);
+                PackingDB.Insert(listDM.Text, listQT.SelectedIndex + 1, input1.Text, input2.Text, input3.Text);
                 resetInput();
                 updateTable();
             }
@@ -104,13 +104,13 @@ namespace App
         //
         //  Add Input values to Read Box
         //
-        private void addReadBox(string QT, string orderNumber, string ID, string trackingNumber, string timeIn)
+        private void addReadBox(string Dimensions, string QT, string orderNumber, string ID, string trackingNumber, string timeIn)
         {
             if (ID == "1333")
             {
                 ID = "Sashko";
             }
-            string[] data = { QT.ToString(), orderNumber.ToString(),
+            string[] data = { Dimensions.ToString(), QT.ToString(), orderNumber.ToString(),
                 ID.ToString(), trackingNumber.ToString(), timeIn.ToString() };
             readBox.Rows.Add(data);
         }
@@ -169,7 +169,7 @@ namespace App
             for (int i = 0; i < countNum; i++)
             {
                 addReadBox(PackingDB.Select()[0][i], PackingDB.Select()[1][i], PackingDB.Select()[2][i],
-                    PackingDB.Select()[3][i], PackingDB.Select()[4][i]);
+                    PackingDB.Select()[3][i], PackingDB.Select()[4][i], PackingDB.Select()[5][i]);
             }
         }
 
