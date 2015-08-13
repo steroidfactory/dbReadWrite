@@ -17,9 +17,7 @@ namespace App
         public Form1()
         {
             InitializeComponent();
-            addQ();
-            readBox.ClearSelection();
-            input1.Focus();
+            setupWindow();
             PackingDB.initDB();
             addTable();
             
@@ -39,7 +37,7 @@ namespace App
         //
         //  Quantity Intialization
         //
-        private void addQ()
+        private void setupWindow()
         {
             for (int i = 1; i < 100; i++)
             {
@@ -47,6 +45,9 @@ namespace App
                 taskA.Wait();
             }
             listQT.SelectedIndex = 0;
+            listDM.SelectedIndex = 0;
+            readBox.ClearSelection();
+            input1.Focus();
         }
 
         //
