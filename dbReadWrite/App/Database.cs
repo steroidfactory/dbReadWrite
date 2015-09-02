@@ -49,8 +49,24 @@ namespace App
         {
             try
             {
-                connection.Open();
-                return true;
+                if (connection.State == System.Data.ConnectionState.Closed)
+                {
+                    
+                    Console.WriteLine("Connect is to open");
+                    connection.Open();
+                    return true;
+                }
+                else if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    Console.WriteLine("Connection is already open");
+                    return true;
+                }
+                if (connection.State == System.Data.ConnectionState.Closed)
+                {
+                    return false;
+                }
+                    return true;
+                
             }
             catch (MySqlException ex)
             {
@@ -59,17 +75,9 @@ namespace App
                 //The two most common error numbers when connecting are as follows:
                 //0: Cannot connect to server.
                 //1045: Invalid user name and/or password.
-                switch (ex.Number)
-                {
-                    case 0:
-                        //MessageBox.Show("Cannot connect to server.  Contact administrator");
-                        break;
-
-                    case 1045:
-                        //MessageBox.Show("Invalid username/password, please try again");
-                        break;
-                }
+                Console.WriteLine("Error in open connection is : " + ex);
                 return false;
+                
             }
         }
 
@@ -84,6 +92,7 @@ namespace App
             }
             catch (MySqlException ex)
             {
+                Console.WriteLine("Error in close connection: " + ex);
                 //MessageBox.Show(ex.Message);
                 return false;
             }
@@ -108,14 +117,12 @@ namespace App
                 " VALUES(" + OrderNumber + ',' + "'" + Dimensions + "'" + "," + "'" + QT + "'" + "," + "'" + Employee + "'" + "," + "'" + TrackingNumber + "'" + "," + "now());";
                 }
             //open connection
-
             if (this.OpenConnection() == true)
             {
                 try
                 {
                     //create command and assign the query and connection from the constructor
                     MySqlCommand cmd = new MySqlCommand(query, connection);
-
                     //Execute command
                     cmd.ExecuteNonQuery();
 
@@ -124,11 +131,60 @@ namespace App
                 }
                 catch (MySqlException s)
                 {
-                    Console.WriteLine(s);
+                    Console.WriteLine("Insert" + s);
                 }
 
             }
             
+        }
+
+        public bool checkIsDuplicateOrder(string input)
+        {
+            string query = ("SELECT Count(*) FROM packing.orders WHERE OrderNumber = " + input + ";");
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+            if (connection.State == System.Data.ConnectionState.Open)
+            {
+                try
+                {
+                    //Create Command
+                    MySqlCommand cmd1 = new MySqlCommand(query, connection);
+                    //Create a data reader and Execute the command
+
+                    //Read the data and store them in the list
+                    using (MySqlDataReader dataReader1 = cmd1.ExecuteReader())
+                    {
+                        while (dataReader1.Read())
+                        {
+                            if (dataReader1 != null)
+                            {
+                                if (dataReader1.GetInt32(0) == 0)
+                                {
+                                    return false;
+                                }
+                                else
+                                {
+                                    return true;
+                                }
+                            }
+
+                        }
+                        CloseConnection();
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    Console.WriteLine("Connection error" + ex);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Connection is still closed");
+            }
+            return true;
+
         }
 
         //Select statement

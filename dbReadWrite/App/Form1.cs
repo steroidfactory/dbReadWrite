@@ -82,11 +82,25 @@ namespace App
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Console.WriteLine("enter pressed");
-                PackingDB.Insert(listDM.Text, listQT.SelectedIndex + 1, input1.Text, input2.Text, input3.Text);
-                resetInput();
-                updateTable();
-            }
+                try
+                {
+                    if (PackingDB.checkIsDuplicateOrder(input1.Text.ToString()) == false)
+                    {
+                       PackingDB.Insert(listDM.Text, listQT.SelectedIndex + 1, input1.Text, input2.Text, input3.Text);
+                       resetInput();
+                       updateTable();
+                    }
+                    else if (PackingDB.checkIsDuplicateOrder(input1.Text.ToString()) == true)
+                    {
+                        MessageBox.Show("The Entered Order Number Already Exists");
+                        resetInput();
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Error on enter");
+                }
+                }
 
         }
 
@@ -172,6 +186,7 @@ namespace App
                 addReadBox(PackingDB.Select()[0][i], PackingDB.Select()[1][i], PackingDB.Select()[2][i],
                     PackingDB.Select()[3][i], PackingDB.Select()[4][i], PackingDB.Select()[5][i]);
             }
+            readBox.Sort(readTimeIn, ListSortDirection.Descending);
         }
 
         private void updateTable()
@@ -187,7 +202,12 @@ namespace App
 
         private void input1_TextChanged(object sender, EventArgs e)
         {
-            
+            if (System.Text.RegularExpressions.Regex.IsMatch(input1.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Congradulations! You didn't use a scanner and now you broke it.");
+                input1.Text.Remove(input1.Text.Length - 1);
+                resetInput();
+            }
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
