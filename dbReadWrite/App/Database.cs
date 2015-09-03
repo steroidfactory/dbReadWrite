@@ -21,8 +21,7 @@ namespace App
         public void initDB()
         {
             setDB();
-            //OpenConnection();
-            Console.WriteLine("DB Initiated");
+            connection.Open();
         }
 
         //
@@ -51,7 +50,6 @@ namespace App
             {
                 if (connection.State == System.Data.ConnectionState.Closed)
                 {
-                    
                     Console.WriteLine("Connect is to open");
                     connection.Open();
                     return true;
@@ -65,8 +63,8 @@ namespace App
                 {
                     return false;
                 }
-                    return true;
-                
+                return true;
+
             }
             catch (MySqlException ex)
             {
@@ -77,7 +75,7 @@ namespace App
                 //1045: Invalid user name and/or password.
                 Console.WriteLine("Error in open connection is : " + ex);
                 return false;
-                
+
             }
         }
 
@@ -85,6 +83,7 @@ namespace App
         //Close connection
         private bool CloseConnection()
         {
+            Console.WriteLine("Closing connectiion");
             try
             {
                 connection.Close();
@@ -102,22 +101,21 @@ namespace App
         //Insert statement
         public void Insert(string Dimensions, int QT, string OrderNumber, string Employee, string TrackingNumber)
         {
-
             string query = "";
-                if (TrackingNumber == "")
-                {
-                    //"INSERT INTO orders (Dimensions, QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
-                    query = "INSERT INTO " + tableOrders + " (OrderNumber, Dimensions, QT, Employee, TimeIn)" +
-                        " VALUES(" + OrderNumber + "," + "'" +  Dimensions + "'" + "," + "'" + QT + "'" + "," + "'" + Employee + "'" + "," + "now());";
-                }
-                else
-                {
+            if (TrackingNumber == "")
+            {
                 //"INSERT INTO orders (Dimensions, QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
-                    query = "INSERT INTO " + tableOrders + " (OrderNumber, Dimensions, QT, Employee, TrackingNumber, TimeIn)" +
-                " VALUES(" + OrderNumber + ',' + "'" + Dimensions + "'" + "," + "'" + QT + "'" + "," + "'" + Employee + "'" + "," + "'" + TrackingNumber + "'" + "," + "now());";
-                }
+                query = "INSERT INTO " + tableOrders + " (OrderNumber, Dimensions, QT, Employee, TimeIn)" +
+                    " VALUES(" + OrderNumber + "," + "'" + Dimensions + "'" + "," + "'" + QT + "'" + "," + "'" + Employee + "'" + "," + "now());";
+            }
+            else
+            {
+                //"INSERT INTO orders (Dimensions, QT, OrderNumber, ID, TrackingNumber, TimeIn) VALUES('QT','OrderNumber','ID,'TrackingNumber',now());
+                query = "INSERT INTO " + tableOrders + " (OrderNumber, Dimensions, QT, Employee, TrackingNumber, TimeIn)" +
+            " VALUES(" + OrderNumber + ',' + "'" + Dimensions + "'" + "," + "'" + QT + "'" + "," + "'" + Employee + "'" + "," + "'" + TrackingNumber + "'" + "," + "now());";
+            }
             //open connection
-            if (this.OpenConnection() == true)
+            if (OpenConnection() == true)
             {
                 try
                 {
@@ -127,7 +125,7 @@ namespace App
                     cmd.ExecuteNonQuery();
 
                     //close connection
-                    this.CloseConnection();
+                    CloseConnection();
                 }
                 catch (MySqlException s)
                 {
@@ -135,7 +133,8 @@ namespace App
                 }
 
             }
-            
+            Console.WriteLine("inserted");
+
         }
 
         public bool checkIsDuplicateOrder(string input)
@@ -202,39 +201,40 @@ namespace App
             list[3] = new List<string>();
             list[4] = new List<string>();
             list[5] = new List<string>();
+            list[6] = new List<string>();
             //}
 
-
-
-
             //Open connection
-            if (this.OpenConnection() == true)
+            if (OpenConnection() == true)
             {
-                
+
                 //Create Command
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
+                // MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 //Read the data and store them in the list
-                while (dataReader.Read())
+                using (MySqlDataReader dataReader = cmd.ExecuteReader())
                 {
-                    list[0].Add(dataReader["Dimensions"] + "");
-                    list[1].Add(dataReader["QT"] + "");
-                    list[2].Add(dataReader["OrderNumber"] + "");
-                    list[3].Add(dataReader["Employee"] + "");
-                    list[4].Add(dataReader["TrackingNumber"] + "");
-                    list[5].Add(dataReader["TimeIn"] + "");
-                    //Console.WriteLine(dataReader["Index_ID"].ToString() + dataReader["QT"] + dataReader["OrderNumber"]
-                    //+ dataReader["ID"] + dataReader["TrackingNumber"] + dataReader["TimeIn"] );
+                    while (dataReader.Read())
+                    {
+                        list[0].Add(dataReader["Dimensions"] + "");
+                        list[1].Add(dataReader["QT"] + "");
+                        list[2].Add(dataReader["OrderNumber"] + "");
+                        list[3].Add(dataReader["Employee"] + "");
+                        list[4].Add(dataReader["TrackingNumber"] + "");
+                        list[5].Add(dataReader["TimeIn"] + "");
+                        list[6].Add(dataReader["TimeOut"] + "");
+
+                        //Console.WriteLine(dataReader["Index_ID"].ToString() + dataReader["QT"] + dataReader["OrderNumber"]
+                        //+ dataReader["ID"] + dataReader["TrackingNumber"] + dataReader["TimeIn"] );
+                    }
+                    //close Data Reader
+                    dataReader.Close();
+
+                    //close Connection
+                    CloseConnection();
                 }
-                
-                //close Data Reader
-                dataReader.Close();
-
-                //close Connection
-                this.CloseConnection();
-
                 //return list to be displayed
                 return list;
             }
@@ -252,7 +252,7 @@ namespace App
             int Count = -1;
 
             //Open Connection
-            if (this.OpenConnection() == true)
+            if (OpenConnection() == true)
             {
                 //Create Mysql Command
                 MySqlCommand cmd = new MySqlCommand(query, connection);
@@ -261,7 +261,7 @@ namespace App
                 Count = int.Parse(cmd.ExecuteScalar() + "");
 
                 //close Connection
-                this.CloseConnection();
+                CloseConnection();
 
                 return Count;
             }
@@ -277,14 +277,15 @@ namespace App
             {
                 return "";
             }
-            string query = ("SELECT * FROM " + tableOrders + " WHERE OrderNumber = " + order +  ";");
+            string query = ("SELECT * FROM " + tableOrders + " WHERE OrderNumber = " + order + ";");
             string status = null;
             bool timeIn = false;
             bool timeOut = false;
             DateTime calcIn = DateTime.MinValue;
+            DateTime calcOut = DateTime.MinValue;
 
             //Open Connection
-            if (this.OpenConnection() == true)
+            if (OpenConnection() == true)
             {
                 timeIn = false;
                 timeOut = false;
@@ -300,30 +301,33 @@ namespace App
                     {
                         timeIn = true;
                         calcIn = DateTime.Parse(dataReader["TimeIn"].ToString());
+                        if (dataReader["TimeOut"].ToString() != "")
+                        {
+                            calcOut = DateTime.Parse(dataReader["TimeOut"].ToString());
+                        }
+
                     }
                     if ((dataReader["TimeOut"].ToString()) != "")
                     {
                         timeOut = true;
                     }
-                    
+
                 }
-                Console.WriteLine(calcIn);
                 if (timeIn == true && timeOut == false)
                 {
-                    status = "Order Open for: " + calcTime(calcIn);
-                    
+                    status = calcTimeOpen(calcIn);
                 }
-                if(timeIn == false && timeOut == false)
+                if (timeIn == false && timeOut == false)
                 {
                     status = "Order does not exist";
                 }
                 if (timeIn == true && timeOut == true)
                 {
-                    status = "Order Closed";
+                    status = calcTimeClosed(calcIn, calcOut);
                 }
 
                 //close Connection
-                this.CloseConnection();
+                CloseConnection();
 
                 return status;
             }
@@ -333,7 +337,7 @@ namespace App
             }
         }
 
-        public string calcTime(DateTime started)
+        public string calcTimeOpen(DateTime started)
         {
             DateTime newDate = DateTime.Now;
 
@@ -345,8 +349,187 @@ namespace App
             int differenceInHours = ts.Hours;
             // Difference in Minutes.
             int differenceInMinutes = ts.Minutes;
-            return ("Open For " + differenceInDays + " Days, " + differenceInHours + " hours, and " + differenceInMinutes + " minutes");
+            return ("Order is open for: " + differenceInDays + " Days, " + differenceInHours + " hours, and " + differenceInMinutes + " minutes");
         }
+
+        public string calcTimeClosed(DateTime started, DateTime ended)
+        {
+            // Difference in days, hours, and minutes.
+            TimeSpan ts = ended - started;
+            // Difference in days.
+            int differenceInDays = ts.Days;
+            // Difference in days.
+            int differenceInHours = ts.Hours;
+            // Difference in Minutes.
+            int differenceInMinutes = ts.Minutes;
+            return ("Order was open for: " + differenceInDays + " Days, " + differenceInHours + " hours, and " + differenceInMinutes + " minutes");
+        }
+
+        public int orderToIndex(string orderNumber)
+        {
+            string query = "SELECT Count* FROM " + tableOrders + "WHERE OrderNumber = " + orderNumber + ";";
+
+            //Open Connection
+            if (OpenConnection() == true)
+            {
+                //Create Mysql Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                //Read the data and store them in the list
+                using (MySqlDataReader dataReader1 = cmd.ExecuteReader())
+                {
+                    while (dataReader1.Read())
+                    {
+
+                    }
+
+
+                    //close Connection
+                    CloseConnection();
+                    return 1;
+
+                }
+            }
+            else
+            {
+                return 2;
+            }
+        }
+
+        //Select statement
+        public List<string>[] SelectByOrder(int orderNumber)
+        {
+            string query = "SELECT * FROM " + tableOrders + " WHERE OrderNumber = " + orderNumber.ToString() + ";";
+            //string query = "SELECT * FROM orders WHERE OrderNumber = 99;";
+            //int countNum = Count();
+            //Create a list to store the result
+            List<string>[] list = new List<string>[7];
+            //for (int i = 0; i<=4; i++)
+            //{
+            list[0] = new List<string>();
+            list[1] = new List<string>();
+            list[2] = new List<string>();
+            list[3] = new List<string>();
+            list[4] = new List<string>();
+            list[5] = new List<string>();
+            list[6] = new List<string>();
+            //}
+
+            //Open connection
+            if (OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                // MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                using (MySqlDataReader dataReader = cmd.ExecuteReader())
+                {
+                    while (dataReader.Read())
+                    {
+                        list[0].Add(dataReader["Dimensions"] + "");
+                        list[1].Add(dataReader["QT"] + "");
+                        list[2].Add(dataReader["OrderNumber"] + "");
+                        list[3].Add(dataReader["Employee"] + "");
+                        list[4].Add(dataReader["TrackingNumber"] + "");
+                        list[5].Add(dataReader["TimeIn"] + "");
+                        list[6].Add(dataReader["TimeOut"] + "");
+
+                        //Console.WriteLine(dataReader["Index_ID"].ToString() + dataReader["QT"] + dataReader["OrderNumber"]
+                        //+ dataReader["ID"] + dataReader["TrackingNumber"] + dataReader["TimeIn"] );
+                    }
+                    //close Data Reader
+                    dataReader.Close();
+
+                    //close Connection
+                    CloseConnection();
+                }
+                //return list to be displayed
+                return list;
+            }
+            else
+            {
+                return list;
+            }
+        }
+
+        //Select statement
+        public List<string>[] SelectInvetory()
+        {
+            string query = "SELECT * FROM " + tableInventory + ";";
+            //int countNum = Count();
+            //Create a list to store the result
+            List<string>[] list = new List<string>[7];
+            //for (int i = 0; i<=4; i++)
+            //{
+            list[0] = new List<string>();
+            list[1] = new List<string>();
+            //}
+
+            //Open connection
+            if (OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                // MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                using (MySqlDataReader dataReader = cmd.ExecuteReader())
+                {
+                    while (dataReader.Read())
+                    {
+                        list[0].Add(dataReader["Dimensions"] + "");
+                        list[1].Add(dataReader["QT"] + "");
+                        //Console.WriteLine(dataReader["Index_ID"].ToString() + dataReader["QT"] + dataReader["OrderNumber"]
+                        //+ dataReader["ID"] + dataReader["TrackingNumber"] + dataReader["TimeIn"] );
+                    }
+                    //close Data Reader
+                    dataReader.Close();
+
+                    //close Connection
+                    CloseConnection();
+                }
+                //return list to be displayed
+                return list;
+            }
+            else
+            {
+                return list;
+            }
+        }
+
+        //Count statement
+        public int CountInvetory()
+        {
+            string query = "SELECT Count(*) FROM " + tableInventory + ";";
+            int Count = -1;
+
+            //Open Connection
+            if (OpenConnection() == true)
+            {
+                //Create Mysql Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                //ExecuteScalar will return one value
+                Count = int.Parse(cmd.ExecuteScalar() + "");
+
+                //close Connection
+                CloseConnection();
+
+                return Count;
+            }
+            else
+            {
+                return Count;
+            }
+        }
+
+
+
+
+
 
     }
 }

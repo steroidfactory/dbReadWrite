@@ -45,9 +45,23 @@ namespace App
                 taskA.Wait();
             }
             listQT.SelectedIndex = 0;
-            listDM.SelectedIndex = 0;
+            addToDMList();
             readBox.ClearSelection();
             input1.Focus();
+        }
+
+        private void addToDMList()
+        {
+            if (listDM.Items.Count > 0)
+               {
+                 listDM.Items.Clear();
+                }
+            
+            for (int i = 0; i < 3; i++)
+            {
+                listDM.Items.Add(PackingDB.SelectInvetory()[0][i].ToString());
+            }
+            listDM.SelectedIndex = 0;
         }
 
         //
@@ -130,6 +144,13 @@ namespace App
             readBox.Rows.Add(data);
         }
 
+        private void addDimensions(string Dimensions, string QT)
+        {
+
+            string[] data = { Dimensions.ToString(), QT.ToString() };
+             
+            readBox.Rows.Add(data);
+        }
 
         //
         //  Convert ID Number to Initials
@@ -178,6 +199,9 @@ namespace App
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// PackingDB.Select is causing the performance issue
+        /// </summary>
         private void addTable()
         {
             int countNum = PackingDB.Count();
@@ -214,14 +238,7 @@ namespace App
         {
             checkOrder();
         }
-        private void statusOrder()
-        {
-            lblStatusOrder.Text = PackingDB.statusOrder(inputOrderStatus.Text.ToString());
-        }
-        private void statusOrderNumber()
-        {
-            lblOrderStatusNumber.Text = "Order: " + inputOrderStatus.Text;
-        }
+
 
         private void inputOrderStatus_KeyDown(object sender, KeyEventArgs e)
         {
@@ -233,8 +250,24 @@ namespace App
 
         private void checkOrder()
         {
-            statusOrder();
-            statusOrderNumber();
+            int orderNumber = Int32.Parse(inputOrderStatus.Text);
+            MessageBox.Show(
+                "Order Number: " +  orderNumber
+                + Environment.NewLine +
+                "Quantity: " + PackingDB.SelectByOrder(orderNumber)[1][0]
+                + Environment.NewLine +
+                "Dimentions: " + PackingDB.SelectByOrder(orderNumber)[0][0]
+                + Environment.NewLine +
+                PackingDB.statusOrder(inputOrderStatus.Text.ToString())
+                + Environment.NewLine +
+                "Employee: " + PackingDB.SelectByOrder(orderNumber)[3][0]
+                + Environment.NewLine +
+                "Time In: " + PackingDB.SelectByOrder(orderNumber)[5][0]
+                + Environment.NewLine +
+                "Time Out: " + PackingDB.SelectByOrder(orderNumber)[6][0]
+                + Environment.NewLine +
+                "Tracking Number: " + PackingDB.SelectByOrder(orderNumber)[4][0]
+                );
             inputOrderStatus.Clear();
         }
     }

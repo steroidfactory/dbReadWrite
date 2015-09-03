@@ -37,12 +37,9 @@
             this.readTimeIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelReadBox = new System.Windows.Forms.Panel();
             this.panelOrderStatus = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.inputOrderStatus = new System.Windows.Forms.TextBox();
             this.btnCheckOrder = new System.Windows.Forms.Button();
-            this.lblStatusOrder = new System.Windows.Forms.Label();
-            this.lblOrderStatusNumber = new System.Windows.Forms.Label();
+            this.inputOrderStatus = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panelInput = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -59,7 +56,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.readBox)).BeginInit();
             this.panelReadBox.SuspendLayout();
             this.panelOrderStatus.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.panelInput.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -146,52 +142,17 @@
             // panelOrderStatus
             // 
             this.panelOrderStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelOrderStatus.Controls.Add(this.btnCheckOrder);
+            this.panelOrderStatus.Controls.Add(this.inputOrderStatus);
             this.panelOrderStatus.Controls.Add(this.label6);
-            this.panelOrderStatus.Controls.Add(this.tableLayoutPanel2);
             this.panelOrderStatus.Location = new System.Drawing.Point(617, 27);
             this.panelOrderStatus.Name = "panelOrderStatus";
             this.panelOrderStatus.Size = new System.Drawing.Size(389, 152);
             this.panelOrderStatus.TabIndex = 13;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F);
-            this.label6.Location = new System.Drawing.Point(16, 13);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(182, 36);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Check Order";
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.76389F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.23611F));
-            this.tableLayoutPanel2.Controls.Add(this.inputOrderStatus, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnCheckOrder, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.lblStatusOrder, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lblOrderStatusNumber, 0, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 71);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(387, 79);
-            this.tableLayoutPanel2.TabIndex = 16;
-            // 
-            // inputOrderStatus
-            // 
-            this.inputOrderStatus.Location = new System.Drawing.Point(3, 3);
-            this.inputOrderStatus.Name = "inputOrderStatus";
-            this.inputOrderStatus.Size = new System.Drawing.Size(93, 20);
-            this.inputOrderStatus.TabIndex = 19;
-            this.inputOrderStatus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputOrderStatus_KeyDown);
-            // 
             // btnCheckOrder
             // 
-            this.btnCheckOrder.Location = new System.Drawing.Point(141, 3);
+            this.btnCheckOrder.Location = new System.Drawing.Point(188, 86);
             this.btnCheckOrder.Name = "btnCheckOrder";
             this.btnCheckOrder.Size = new System.Drawing.Size(179, 33);
             this.btnCheckOrder.TabIndex = 20;
@@ -199,23 +160,23 @@
             this.btnCheckOrder.UseVisualStyleBackColor = true;
             this.btnCheckOrder.Click += new System.EventHandler(this.btnCheck_Click);
             // 
-            // lblStatusOrder
+            // inputOrderStatus
             // 
-            this.lblStatusOrder.AutoSize = true;
-            this.lblStatusOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblStatusOrder.Location = new System.Drawing.Point(141, 39);
-            this.lblStatusOrder.Name = "lblStatusOrder";
-            this.lblStatusOrder.Size = new System.Drawing.Size(0, 17);
-            this.lblStatusOrder.TabIndex = 21;
+            this.inputOrderStatus.Location = new System.Drawing.Point(48, 93);
+            this.inputOrderStatus.Name = "inputOrderStatus";
+            this.inputOrderStatus.Size = new System.Drawing.Size(93, 20);
+            this.inputOrderStatus.TabIndex = 19;
+            this.inputOrderStatus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputOrderStatus_KeyDown);
             // 
-            // lblOrderStatusNumber
+            // label6
             // 
-            this.lblOrderStatusNumber.AutoSize = true;
-            this.lblOrderStatusNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblOrderStatusNumber.Location = new System.Drawing.Point(3, 39);
-            this.lblOrderStatusNumber.Name = "lblOrderStatusNumber";
-            this.lblOrderStatusNumber.Size = new System.Drawing.Size(0, 17);
-            this.lblOrderStatusNumber.TabIndex = 22;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F);
+            this.label6.Location = new System.Drawing.Point(102, 13);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(182, 36);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Check Order";
             // 
             // label5
             // 
@@ -269,8 +230,6 @@
             // 
             this.listDM.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listDM.FormattingEnabled = true;
-            this.listDM.Items.AddRange(new object[] {
-            "4x4x4"});
             this.listDM.Location = new System.Drawing.Point(3, 51);
             this.listDM.Name = "listDM";
             this.listDM.Size = new System.Drawing.Size(75, 21);
@@ -390,8 +349,6 @@
             this.panelReadBox.ResumeLayout(false);
             this.panelOrderStatus.ResumeLayout(false);
             this.panelOrderStatus.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
             this.panelInput.ResumeLayout(false);
             this.panelInput.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -405,10 +362,8 @@
         private System.Windows.Forms.Panel panelReadBox;
         private System.Windows.Forms.Panel panelOrderStatus;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox inputOrderStatus;
         private System.Windows.Forms.Button btnCheckOrder;
-        private System.Windows.Forms.Label lblStatusOrder;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panelInput;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -420,7 +375,6 @@
         private System.Windows.Forms.TextBox input2;
         private System.Windows.Forms.TextBox input1;
         private System.Windows.Forms.ComboBox listQT;
-        private System.Windows.Forms.Label lblOrderStatusNumber;
         private System.Windows.Forms.ComboBox listDM;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridViewTextBoxColumn readDM;
