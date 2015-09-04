@@ -17,8 +17,8 @@ namespace App
         public Form1()
         {
             InitializeComponent();
-            setupWindow();
             PackingDB.initDB();
+            setupWindow();
             addTable();
             
         }
@@ -45,23 +45,23 @@ namespace App
                 taskA.Wait();
             }
             listQT.SelectedIndex = 0;
-            addToDMList();
+            updateDMList();
             readBox.ClearSelection();
             input1.Focus();
         }
 
-        private void addToDMList()
+        private void updateDMList()
         {
-            if (listDM.Items.Count > 0)
-               {
-                 listDM.Items.Clear();
-                }
-            
-            for (int i = 0; i < 3; i++)
+          if (listDM.Items.Count > 0)
             {
-                listDM.Items.Add(PackingDB.SelectInvetory()[0][i].ToString());
+              listDM.Items.Clear();
+           }
+          
+            for (int i = 0; i < PackingDB.CountInventory(); i++)
+           {
+                listDM.Items.Add(PackingDB.SelectInventory()[0][i].ToString());
             }
-            listDM.SelectedIndex = 0;
+           listDM.SelectedIndex = 0;
         }
 
         //
@@ -100,9 +100,11 @@ namespace App
                 {
                     if (PackingDB.checkIsDuplicateOrder(input1.Text.ToString()) == false)
                     {
-                       PackingDB.Insert(listDM.Text, listQT.SelectedIndex + 1, input1.Text, input2.Text, input3.Text);
-                       resetInput();
-                       updateTable();
+                        PackingDB.Insert(listDM.Text, listQT.SelectedIndex + 1, input1.Text, input2.Text, input3.Text);
+                        resetInput();
+                        PackingDB.removeFromInventory(listDM.Text, listQT.Text);
+                        updateDMList();
+                        updateTable();
                     }
                     else if (PackingDB.checkIsDuplicateOrder(input1.Text.ToString()) == true)
                     {
@@ -159,8 +161,7 @@ namespace App
         {
             //Convert ID Number to Initials by checking the database
         }
-
-            
+        
 
         private void readBox_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -269,6 +270,33 @@ namespace App
                 "Tracking Number: " + PackingDB.SelectByOrder(orderNumber)[4][0]
                 );
             inputOrderStatus.Clear();
+        }
+
+        private void displayInventory()
+        {
+
+        }
+
+        private void inventoryCheck()
+        {
+            string[] data = new string[PackingDB.CountInventory()];
+            for (int i = 0; i < PackingDB.CountInventory(); i++)
+            {
+                data[i] = ( PackingDB.SelectInventory()[0][i].ToString() + "  :  " + PackingDB.SelectInventory()[1][i].ToString());
+            }
+            string list = string.Join(Environment.NewLine, data);
+            MessageBox.Show(list);
+        }
+
+        private void btnInventoryCheck_Click_1(object sender, EventArgs e)
+        {
+            Console.WriteLine("Inventory check");
+            inventoryCheck();
+        }
+
+        private void btnInventoryAdd_Click_1(object sender, EventArgs e)
+        {
+            
         }
     }
 }

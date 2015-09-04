@@ -53,11 +53,17 @@
             this.input1 = new System.Windows.Forms.TextBox();
             this.listQT = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnInventoryAdd = new System.Windows.Forms.Button();
+            this.btnInventoryCheck = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.readBox)).BeginInit();
             this.panelReadBox.SuspendLayout();
             this.panelOrderStatus.SuspendLayout();
             this.panelInput.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // readBox
@@ -147,14 +153,14 @@
             this.panelOrderStatus.Controls.Add(this.label6);
             this.panelOrderStatus.Location = new System.Drawing.Point(617, 27);
             this.panelOrderStatus.Name = "panelOrderStatus";
-            this.panelOrderStatus.Size = new System.Drawing.Size(389, 152);
+            this.panelOrderStatus.Size = new System.Drawing.Size(183, 152);
             this.panelOrderStatus.TabIndex = 13;
             // 
             // btnCheckOrder
             // 
-            this.btnCheckOrder.Location = new System.Drawing.Point(188, 86);
+            this.btnCheckOrder.Location = new System.Drawing.Point(9, 104);
             this.btnCheckOrder.Name = "btnCheckOrder";
-            this.btnCheckOrder.Size = new System.Drawing.Size(179, 33);
+            this.btnCheckOrder.Size = new System.Drawing.Size(159, 33);
             this.btnCheckOrder.TabIndex = 20;
             this.btnCheckOrder.Text = "Check Order";
             this.btnCheckOrder.UseVisualStyleBackColor = true;
@@ -162,7 +168,7 @@
             // 
             // inputOrderStatus
             // 
-            this.inputOrderStatus.Location = new System.Drawing.Point(48, 93);
+            this.inputOrderStatus.Location = new System.Drawing.Point(44, 65);
             this.inputOrderStatus.Name = "inputOrderStatus";
             this.inputOrderStatus.Size = new System.Drawing.Size(93, 20);
             this.inputOrderStatus.TabIndex = 19;
@@ -172,7 +178,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F);
-            this.label6.Location = new System.Drawing.Point(102, 13);
+            this.label6.Location = new System.Drawing.Point(3, 13);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(182, 36);
             this.label6.TabIndex = 17;
@@ -332,6 +338,56 @@
             this.label7.Text = "DM";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(548, 191);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.btnInventoryAdd);
+            this.panel1.Controls.Add(this.btnInventoryCheck);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Location = new System.Drawing.Point(809, 27);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(164, 152);
+            this.panel1.TabIndex = 21;
+            // 
+            // btnInventoryAdd
+            // 
+            this.btnInventoryAdd.Location = new System.Drawing.Point(14, 58);
+            this.btnInventoryAdd.Name = "btnInventoryAdd";
+            this.btnInventoryAdd.Size = new System.Drawing.Size(134, 33);
+            this.btnInventoryAdd.TabIndex = 21;
+            this.btnInventoryAdd.Text = "Add";
+            this.btnInventoryAdd.UseVisualStyleBackColor = true;
+            this.btnInventoryAdd.Click += new System.EventHandler(this.btnInventoryAdd_Click_1);
+            // 
+            // btnInventoryCheck
+            // 
+            this.btnInventoryCheck.Location = new System.Drawing.Point(14, 103);
+            this.btnInventoryCheck.Name = "btnInventoryCheck";
+            this.btnInventoryCheck.Size = new System.Drawing.Size(134, 33);
+            this.btnInventoryCheck.TabIndex = 20;
+            this.btnInventoryCheck.Text = "Check";
+            this.btnInventoryCheck.UseVisualStyleBackColor = true;
+            this.btnInventoryCheck.Click += new System.EventHandler(this.btnInventoryCheck_Click_1);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F);
+            this.label8.Location = new System.Drawing.Point(16, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(138, 36);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Inventory";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,6 +395,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1008, 682);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panelInput);
             this.Controls.Add(this.panelOrderStatus);
             this.Controls.Add(this.panelReadBox);
@@ -353,6 +411,8 @@
             this.panelInput.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -383,6 +443,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn readID;
         private System.Windows.Forms.DataGridViewTextBoxColumn readTrackingNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn readTimeIn;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnInventoryAdd;
+        private System.Windows.Forms.Button btnInventoryCheck;
+        private System.Windows.Forms.Label label8;
     }
 }
 

@@ -10,6 +10,7 @@ namespace App
     class Database
     {
         private MySqlConnection connection;
+        private MySqlConnection connectionInventory;
         private string server;
         private string database;
         private string uid;
@@ -21,7 +22,6 @@ namespace App
         public void initDB()
         {
             setDB();
-            connection.Open();
         }
 
         //
@@ -37,6 +37,7 @@ namespace App
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";" + "Convert Zero Datetime=True;";
             connection = new MySqlConnection(connectionString);
+            connectionInventory = new MySqlConnection(connectionString);
             tableOrders = "orders";
             tableInventory = "inventory";
         }
@@ -87,6 +88,59 @@ namespace App
             try
             {
                 connection.Close();
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error in close connection: " + ex);
+                //MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+
+        private bool OpenConnectionInventory()
+        {
+            try
+            {
+                if (connectionInventory.State == System.Data.ConnectionState.Closed)
+                {
+                    Console.WriteLine("Connect is to open");
+                    connectionInventory.Open();
+                    return true;
+                }
+                else if (connectionInventory.State == System.Data.ConnectionState.Open)
+                {
+                    Console.WriteLine("Connection is already open");
+                    return true;
+                }
+                if (connectionInventory.State == System.Data.ConnectionState.Closed)
+                {
+                    return false;
+                }
+                return true;
+
+            }
+            catch (MySqlException ex)
+            {
+                //When handling errors, you can your application's response based 
+                //on the error number.
+                //The two most common error numbers when connecting are as follows:
+                //0: Cannot connect to server.
+                //1045: Invalid user name and/or password.
+                Console.WriteLine("Error in open connection is : " + ex);
+                return false;
+
+            }
+        }
+
+
+        //Close connection
+        private bool CloseConnectionInventory()
+        {
+            Console.WriteLine("Closing connectiion");
+            try
+            {
+                connectionInventory.Close();
                 return true;
             }
             catch (MySqlException ex)
@@ -455,35 +509,36 @@ namespace App
         }
 
         //Select statement
-        public List<string>[] SelectInvetory()
+        public List<string>[] SelectInventory()
         {
             string query = "SELECT * FROM " + tableInventory + ";";
             //int countNum = Count();
             //Create a list to store the result
-            List<string>[] list = new List<string>[7];
-            //for (int i = 0; i<=4; i++)
-            //{
+            List<string>[] list = new List<string>[2];
+
             list[0] = new List<string>();
             list[1] = new List<string>();
             //}
-
             //Open connection
-            if (OpenConnection() == true)
+            if (OpenConnectionInventory() == true)
             {
                 //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlCommand cmd = new MySqlCommand(query, connectionInventory);
                 //Create a data reader and Execute the command
                 // MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 //Read the data and store them in the list
                 using (MySqlDataReader dataReader = cmd.ExecuteReader())
                 {
+                    Console.WriteLine("Datareader Succes");
                     while (dataReader.Read())
                     {
+                        // Console.WriteLine((dataReader["Dimensions"] + "").ToString());
                         list[0].Add(dataReader["Dimensions"] + "");
                         list[1].Add(dataReader["QT"] + "");
                         //Console.WriteLine(dataReader["Index_ID"].ToString() + dataReader["QT"] + dataReader["OrderNumber"]
                         //+ dataReader["ID"] + dataReader["TrackingNumber"] + dataReader["TimeIn"] );
+                        Console.WriteLine(list[0][0]);
                     }
                     //close Data Reader
                     dataReader.Close();
@@ -500,8 +555,36 @@ namespace App
             }
         }
 
+        public void removeFromInventory(string dimensions, string qt)
+        {
+            Console.WriteLine("Dimensions are: " + dimensions);
+            Console.WriteLine("Quantity is: " + qt);
+            string query = ("UPDATE " + "packing.inventory" + " SET QT = QT - " + qt + " WHERE Dimensions = " + "'" + dimensions + "'" + ";");
+            //string query = "UPDATE packing.inventory SET QT = QT - 1 WHERE Dimensions = '1x1x1';";
+            try
+            {
+
+                //Open Connection
+                if (OpenConnectionInventory() == true)
+                {
+                    //Create Mysql Command
+                    MySqlCommand cmd = new MySqlCommand(query, connectionInventory);
+
+                    //ExecuteScalar will return one value
+                    cmd.ExecuteScalar();
+
+                    //close Connection
+                    CloseConnectionInventory();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
         //Count statement
-        public int CountInvetory()
+        public int CountInventory()
         {
             string query = "SELECT Count(*) FROM " + tableInventory + ";";
             int Count = -1;
@@ -516,7 +599,7 @@ namespace App
                 Count = int.Parse(cmd.ExecuteScalar() + "");
 
                 //close Connection
-                CloseConnection();
+                CloseConnectionInventory();
 
                 return Count;
             }
