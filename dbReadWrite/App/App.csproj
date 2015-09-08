@@ -28,7 +28,7 @@
     <PublisherName>Steroid Factory</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>24</ApplicationRevision>
+    <ApplicationRevision>25</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -94,6 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
+    <Compile Include="Database_Employees.cs" />
+    <Compile Include="Database_Inventory.cs" />
+    <Compile Include="Database_Orders.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -130,6 +130,13 @@ namespace App
                         MessageBox.Show("The Entered Order Number Already Exists.");
                         resetInput();
                     }
+
+                    //Untested
+                    else if (inputEmployee.Text == "" || inputEmployee.Text == null)
+                    {
+                        MessageBox.Show("Please enter a valid Employee ID");
+                        resetInput();
+                    }
                 }
                 catch
                 {
