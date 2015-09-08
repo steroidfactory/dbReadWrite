@@ -48,16 +48,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.input3 = new System.Windows.Forms.TextBox();
-            this.input2 = new System.Windows.Forms.TextBox();
-            this.input1 = new System.Windows.Forms.TextBox();
+            this.inputTracking = new System.Windows.Forms.TextBox();
+            this.inputEmployee = new System.Windows.Forms.TextBox();
+            this.inputOrderNumber = new System.Windows.Forms.TextBox();
             this.listQT = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnInventoryAdd = new System.Windows.Forms.Button();
             this.btnInventoryCheck = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.readBox)).BeginInit();
             this.panelReadBox.SuspendLayout();
             this.panelOrderStatus.SuspendLayout();
@@ -218,9 +218,9 @@
             this.tableLayoutPanel1.Controls.Add(this.label3, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.input3, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.input2, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.input1, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.inputTracking, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.inputEmployee, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.inputOrderNumber, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.listQT, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -240,6 +240,7 @@
             this.listDM.Name = "listDM";
             this.listDM.Size = new System.Drawing.Size(75, 21);
             this.listDM.TabIndex = 7;
+            this.listDM.SelectedValueChanged += new System.EventHandler(this.listDM_SelectedValueChanged);
             // 
             // label4
             // 
@@ -289,33 +290,33 @@
             this.label1.Text = "Order Number";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // input3
+            // inputTracking
             // 
-            this.input3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.input3.Location = new System.Drawing.Point(419, 51);
-            this.input3.Name = "input3";
-            this.input3.Size = new System.Drawing.Size(152, 20);
-            this.input3.TabIndex = 3;
-            this.input3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input3_KeyDown);
+            this.inputTracking.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inputTracking.Location = new System.Drawing.Point(419, 51);
+            this.inputTracking.Name = "inputTracking";
+            this.inputTracking.Size = new System.Drawing.Size(152, 20);
+            this.inputTracking.TabIndex = 3;
+            this.inputTracking.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input3_KeyDown);
             // 
-            // input2
+            // inputEmployee
             // 
-            this.input2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.input2.Location = new System.Drawing.Point(275, 51);
-            this.input2.Name = "input2";
-            this.input2.Size = new System.Drawing.Size(138, 20);
-            this.input2.TabIndex = 2;
-            this.input2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input2_KeyDown);
+            this.inputEmployee.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inputEmployee.Location = new System.Drawing.Point(275, 51);
+            this.inputEmployee.Name = "inputEmployee";
+            this.inputEmployee.Size = new System.Drawing.Size(138, 20);
+            this.inputEmployee.TabIndex = 2;
+            this.inputEmployee.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input2_KeyDown);
             // 
-            // input1
+            // inputOrderNumber
             // 
-            this.input1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.input1.Location = new System.Drawing.Point(131, 51);
-            this.input1.Name = "input1";
-            this.input1.Size = new System.Drawing.Size(138, 20);
-            this.input1.TabIndex = 1;
-            this.input1.TextChanged += new System.EventHandler(this.input1_TextChanged);
-            this.input1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input1_KeyDown);
+            this.inputOrderNumber.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inputOrderNumber.Location = new System.Drawing.Point(131, 51);
+            this.inputOrderNumber.Name = "inputOrderNumber";
+            this.inputOrderNumber.Size = new System.Drawing.Size(138, 20);
+            this.inputOrderNumber.TabIndex = 1;
+            this.inputOrderNumber.TextChanged += new System.EventHandler(this.input1_TextChanged);
+            this.inputOrderNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input1_KeyDown);
             // 
             // listQT
             // 
@@ -337,15 +338,6 @@
             this.label7.TabIndex = 6;
             this.label7.Text = "DM";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(548, 191);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -388,6 +380,15 @@
             this.label8.TabIndex = 17;
             this.label8.Text = "Inventory";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(361, 191);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,8 +396,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1008, 682);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelInput);
             this.Controls.Add(this.panelOrderStatus);
             this.Controls.Add(this.panelReadBox);
@@ -431,9 +432,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox input3;
-        private System.Windows.Forms.TextBox input2;
-        private System.Windows.Forms.TextBox input1;
+        private System.Windows.Forms.TextBox inputTracking;
+        private System.Windows.Forms.TextBox inputEmployee;
+        private System.Windows.Forms.TextBox inputOrderNumber;
         private System.Windows.Forms.ComboBox listQT;
         private System.Windows.Forms.ComboBox listDM;
         private System.Windows.Forms.Label label7;
@@ -443,11 +444,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn readID;
         private System.Windows.Forms.DataGridViewTextBoxColumn readTrackingNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn readTimeIn;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnInventoryAdd;
         private System.Windows.Forms.Button btnInventoryCheck;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button button1;
     }
 }
 

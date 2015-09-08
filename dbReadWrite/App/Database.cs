@@ -30,7 +30,7 @@ namespace App
         private void setDB()
         {
             server = "10.11.3.3";
-            database = "packing";
+            database = "steroidfactory";
             uid = "steroid";
             password = "andriyk";
             string connectionString;
@@ -38,8 +38,8 @@ namespace App
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";" + "Convert Zero Datetime=True;";
             connection = new MySqlConnection(connectionString);
             connectionInventory = new MySqlConnection(connectionString);
-            tableOrders = "orders";
-            tableInventory = "inventory";
+            tableOrders = "packing_orders";
+            tableInventory = "packing_inventory";
         }
 
 
@@ -193,7 +193,7 @@ namespace App
 
         public bool checkIsDuplicateOrder(string input)
         {
-            string query = ("SELECT Count(*) FROM packing.orders WHERE OrderNumber = " + input + ";");
+            string query = ("SELECT Count(*) FROM " + tableOrders + " WHERE OrderNumber = " + input + ";");
             if (connection.State == System.Data.ConnectionState.Closed)
             {
                 connection.Open();
@@ -555,11 +555,54 @@ namespace App
             }
         }
 
-        public void removeFromInventory(string dimensions, string qt)
+        public List<string>[] SelectInventoryQT(string input)
         {
-            Console.WriteLine("Dimensions are: " + dimensions);
-            Console.WriteLine("Quantity is: " + qt);
-            string query = ("UPDATE " + "packing.inventory" + " SET QT = QT - " + qt + " WHERE Dimensions = " + "'" + dimensions + "'" + ";");
+            string query = "SELECT * FROM " + tableInventory + " WHERE Dimensions = '" + input + "';";
+            //int countNum = Count();
+            //Create a list to store the result
+            List<string>[] list = new List<string>[2];
+
+            list[0] = new List<string>();
+            list[1] = new List<string>();
+            //}
+            //Open connection
+            if (OpenConnectionInventory() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connectionInventory);
+                //Create a data reader and Execute the command
+                // MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                using (MySqlDataReader dataReader = cmd.ExecuteReader())
+                {
+                    Console.WriteLine("Datareader Succes");
+                    while (dataReader.Read())
+                    {
+                        // Console.WriteLine((dataReader["Dimensions"] + "").ToString());
+                        list[0].Add(dataReader["Dimensions"] + "");
+                        list[1].Add(dataReader["QT"] + "");
+                        //Console.WriteLine(dataReader["Index_ID"].ToString() + dataReader["QT"] + dataReader["OrderNumber"]
+                        //+ dataReader["ID"] + dataReader["TrackingNumber"] + dataReader["TimeIn"] );
+                    }
+                    //close Data Reader
+                    dataReader.Close();
+
+                    //close Connection
+                    CloseConnection();
+                }
+                //return list to be displayed
+                return list;
+            }
+            else
+            {
+                return list;
+            }
+        }
+
+        public void removeFromInventory(string dimensions, int qt)
+        {
+            string query = ("UPDATE " + tableInventory + " SET QT = QT - " + qt + " WHERE Dimensions = " + "'" + dimensions + "'" + ";");
             //string query = "UPDATE packing.inventory SET QT = QT - 1 WHERE Dimensions = '1x1x1';";
             try
             {
@@ -610,9 +653,6 @@ namespace App
         }
 
 
-
-
-
-
     }
+
 }

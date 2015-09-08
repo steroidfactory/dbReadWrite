@@ -32,37 +32,50 @@ namespace App
         //
         private void listQT_SelectedIndexChanged(object sender, EventArgs e)
         {
-            input1.Focus();
+            inputOrderNumber.Focus();
         }
         //
         //  Quantity Intialization
         //
         private void setupWindow()
         {
-            for (int i = 1; i < 100; i++)
-            {
-                Task taskA = Task.Factory.StartNew(() => listQT.Items.Add(i));
-                taskA.Wait();
-            }
-            listQT.SelectedIndex = 0;
+            //for (int i = 1; i < 100; i++)
+          //  {
+           //     Task taskA = Task.Factory.StartNew(() => listQT.Items.Add(i));
+         //       taskA.Wait();
+        //    }
+            //listQT.SelectedIndex = 0;
             updateDMList();
             readBox.ClearSelection();
-            input1.Focus();
+            inputOrderNumber.Focus();
         }
 
         private void updateDMList()
         {
-          if (listDM.Items.Count > 0)
+            try
             {
-              listDM.Items.Clear();
-           }
-          
-            for (int i = 0; i < PackingDB.CountInventory(); i++)
-           {
-                listDM.Items.Add(PackingDB.SelectInventory()[0][i].ToString());
+                InputEnable();
+                if (listDM.Items.Count > 0)
+                {
+                    listDM.Items.Clear();
+                }
+
+                for (int i = 0; i < PackingDB.CountInventory(); i++)
+                {
+                    listDM.Items.Add(PackingDB.SelectInventory()[0][i].ToString());
+                }
+                listDM.SelectedIndex = 0;
             }
-           listDM.SelectedIndex = 0;
-        }
+            catch
+            {
+                InputDisable(); 
+                MessageBox.Show("Inventory is empty");
+            }
+
+
+            }
+
+          
 
         //
         //  Input 1
@@ -72,7 +85,7 @@ namespace App
             if (e.KeyCode == Keys.Enter)
             {
                 Console.WriteLine("enter pressed");
-                input2.Focus();
+                inputEmployee.Focus();
                 
             }
         }
@@ -85,7 +98,7 @@ namespace App
             if (e.KeyCode == Keys.Enter)
             {
                 Console.WriteLine("enter pressed");
-                input3.Focus();
+                inputTracking.Focus();
             }
         }
 
@@ -98,17 +111,23 @@ namespace App
             {
                 try
                 {
-                    if (PackingDB.checkIsDuplicateOrder(input1.Text.ToString()) == false)
+                    if (PackingDB.checkIsDuplicateOrder(inputOrderNumber.Text.ToString()) == false)
                     {
-                        PackingDB.Insert(listDM.Text, listQT.SelectedIndex + 1, input1.Text, input2.Text, input3.Text);
+                        PackingDB.Insert(listDM.Text, listQT.SelectedIndex + 1, inputOrderNumber.Text, inputEmployee.Text, inputTracking.Text);
+                        PackingDB.removeFromInventory(listDM.Text, Int32.Parse(listQT.Text));
                         resetInput();
-                        PackingDB.removeFromInventory(listDM.Text, listQT.Text);
                         updateDMList();
+                        updateQTList();
                         updateTable();
                     }
-                    else if (PackingDB.checkIsDuplicateOrder(input1.Text.ToString()) == true)
+                    else if (inputOrderNumber.Text.ToString() == "")
                     {
-                        MessageBox.Show("The Entered Order Number Already Exists");
+                        MessageBox.Show("Please Enter a Valid Order Number.");
+                        resetInput();
+                    }
+                    else if (PackingDB.checkIsDuplicateOrder(inputOrderNumber.Text.ToString()) == true)
+                    {
+                        MessageBox.Show("The Entered Order Number Already Exists.");
                         resetInput();
                     }
                 }
@@ -126,10 +145,10 @@ namespace App
         private void resetInput()
         {
             listQT.SelectedIndex = 0;
-            input1.Clear();
-            input2.Clear();
-            input3.Clear();
-            input1.Focus();
+            inputOrderNumber.Clear();
+            inputEmployee.Clear();
+            inputTracking.Clear();
+            inputOrderNumber.Focus();
         }
 
         //
@@ -181,11 +200,6 @@ namespace App
 
         }
 
-        
-
-        
-
-        
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -227,10 +241,10 @@ namespace App
 
         private void input1_TextChanged(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(input1.Text, "[^0-9]"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(inputOrderNumber.Text, "[^0-9]"))
             {
                 MessageBox.Show("Congradulations! You didn't use a scanner and now you broke it.");
-                input1.Text.Remove(input1.Text.Length - 1);
+                inputOrderNumber.Text.Remove(inputOrderNumber.Text.Length - 1);
                 resetInput();
             }
         }
@@ -276,6 +290,24 @@ namespace App
         {
 
         }
+        
+        private void InputDisable()
+        {
+            listDM.Enabled = false;
+            listQT.Enabled = false;
+            inputOrderNumber.Enabled = false;
+            inputEmployee.Enabled = false;
+            inputTracking.Enabled = false;
+        }
+
+        private void InputEnable()
+        {
+            listDM.Enabled = true;
+            listQT.Enabled = true;
+            inputOrderNumber.Enabled = true;
+            inputEmployee.Enabled = true;
+            inputTracking.Enabled = true;
+        }
 
         private void inventoryCheck()
         {
@@ -298,5 +330,24 @@ namespace App
         {
             
         }
+
+        private void listDM_SelectedValueChanged(object sender, EventArgs e)
+        {
+            updateQTList();
+        }
+
+        private void updateQTList()
+        {
+            listQT.Items.Clear();
+            if (listDM.Text != "")
+            {
+                for (int i = 1; i <= Int32.Parse(PackingDB.SelectInventoryQT(listDM.Text)[1][0]); i++)
+                {
+                    listQT.Items.Add(i);
+                }
+                listQT.SelectedIndex = 0;
+            }
+        }
+
     }
 }
