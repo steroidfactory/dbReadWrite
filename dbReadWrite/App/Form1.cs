@@ -381,7 +381,6 @@ namespace App
                 {
                     return Int32.Parse(PackingDB.checkEmployee(ID)[5][0]);
                 }
-                inputLogin.Clear();
                 return 0;
             }
             catch
@@ -395,9 +394,15 @@ namespace App
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (Authentication(inputLogin.Text) >= 3)
+            if (Authentication(inputLogin.Text) >= 2)
             {
+                inputLogin.Clear();
                 inventoryShow("inventoryAdd");
+            }
+            else
+            {
+                inputLogin.Clear();
+                MessageBox.Show("Unauthorized User");
             }
         }
 
