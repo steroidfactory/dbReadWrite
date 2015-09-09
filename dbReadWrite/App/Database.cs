@@ -55,13 +55,13 @@ namespace App
             {
                 if (connection.State == System.Data.ConnectionState.Closed)
                 {
-                    Console.WriteLine("Connect is to open");
+                    //Console.WriteLine("Connect is to open");
                     connection.Open();
                     return true;
                 }
                 else if (connection.State == System.Data.ConnectionState.Open)
                 {
-                    Console.WriteLine("Connection is already open");
+                    //Console.WriteLine("Connection is already open");
                     return true;
                 }
                 if (connection.State == System.Data.ConnectionState.Closed)
@@ -78,7 +78,7 @@ namespace App
                 //The two most common error numbers when connecting are as follows:
                 //0: Cannot connect to server.
                 //1045: Invalid user name and/or password.
-                Console.WriteLine("Error in open connection is : " + ex);
+                //Console.WriteLine("Error in open connection is : " + ex);
                 return false;
 
             }
@@ -88,7 +88,7 @@ namespace App
         //Close connection
         private bool CloseConnection()
         {
-            Console.WriteLine("Closing connectiion");
+            //Console.WriteLine("Closing connectiion");
             try
             {
                 connection.Close();
@@ -96,7 +96,7 @@ namespace App
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine("Error in close connection: " + ex);
+                //Console.WriteLine("Error in close connection: " + ex);
                 //MessageBox.Show(ex.Message);
                 return false;
             }
@@ -108,13 +108,13 @@ namespace App
             {
                 if (connectionInventory.State == System.Data.ConnectionState.Closed)
                 {
-                    Console.WriteLine("Connect is to open");
+                  //  Console.WriteLine("Connect is to open");
                     connectionInventory.Open();
                     return true;
                 }
                 else if (connectionInventory.State == System.Data.ConnectionState.Open)
                 {
-                    Console.WriteLine("Connection is already open");
+                   // Console.WriteLine("Connection is already open");
                     return true;
                 }
                 if (connectionInventory.State == System.Data.ConnectionState.Closed)
@@ -131,7 +131,7 @@ namespace App
                 //The two most common error numbers when connecting are as follows:
                 //0: Cannot connect to server.
                 //1045: Invalid user name and/or password.
-                Console.WriteLine("Error in open connection is : " + ex);
+                //Console.WriteLine("Error in open connection is : " + ex);
                 return false;
 
             }
@@ -164,7 +164,7 @@ namespace App
                 //The two most common error numbers when connecting are as follows:
                 //0: Cannot connect to server.
                 //1045: Invalid user name and/or password.
-                Console.WriteLine("Error in open connection is : " + ex);
+                //Console.WriteLine("Error in open connection is : " + ex);
                 return false;
 
             }
@@ -173,7 +173,7 @@ namespace App
         //Close connection
         private bool CloseConnectionInventory()
         {
-            Console.WriteLine("Closing connectiion");
+            //Console.WriteLine("Closing connectiion");
             try
             {
                 connectionInventory.Close();
@@ -181,7 +181,7 @@ namespace App
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine("Error in close connection: " + ex);
+               // Console.WriteLine("Error in close connection: " + ex);
                 //MessageBox.Show(ex.Message);
                 return false;
             }
@@ -566,7 +566,7 @@ namespace App
                 //Read the data and store them in the list
                 using (MySqlDataReader dataReader = cmd.ExecuteReader())
                 {
-                    Console.WriteLine("Datareader Succes");
+                    //Console.WriteLine("Datareader Succes");
                     while (dataReader.Read())
                     {
                         // Console.WriteLine((dataReader["Dimensions"] + "").ToString());
@@ -574,7 +574,7 @@ namespace App
                         list[1].Add(dataReader["QT"] + "");
                         //Console.WriteLine(dataReader["Index_ID"].ToString() + dataReader["QT"] + dataReader["OrderNumber"]
                         //+ dataReader["ID"] + dataReader["TrackingNumber"] + dataReader["TimeIn"] );
-                        Console.WriteLine(list[0][0]);
+                       // Console.WriteLine(list[0][0]);
                     }
                     //close Data Reader
                     dataReader.Close();
@@ -612,7 +612,7 @@ namespace App
                 //Read the data and store them in the list
                 using (MySqlDataReader dataReader = cmd.ExecuteReader())
                 {
-                    Console.WriteLine("Datareader Succes");
+                    //Console.WriteLine("Datareader Succes");
                     while (dataReader.Read())
                     {
                         // Console.WriteLine((dataReader["Dimensions"] + "").ToString());
@@ -633,6 +633,28 @@ namespace App
             else
             {
                 return list;
+            }
+        }
+
+        public void closeOrder(string order)
+        {
+            string query = "UPDATE " + tableOrders + " SET TimeOut = now() WHERE OrderNumber = " + order + ";";
+
+            //Open Connection
+            if (OpenConnection() == true)
+            {
+                //Create Mysql Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                //ExecuteScalar will return one value
+                cmd.ExecuteScalar();
+
+                //close Connection
+                CloseConnection();
+            }
+            else
+            {
+                
             }
         }
 
@@ -805,9 +827,9 @@ namespace App
                 }
                 else if (CountInventoryDM(Dimensions) == 0)
                 {
-                    Console.WriteLine("ADDING NEW LINE");
+                    //Console.WriteLine("ADDING NEW LINE");
                     query = "INSERT INTO " + tableInventory + " (Dimensions, QT)" + " VALUES(" + "'" + Dimensions + "'" + ", " + QT +  ");";
-                    Console.WriteLine(query);
+                    //Console.WriteLine(query);
                     //open connection
                     if (OpenConnectionInventory() == true)
                     {

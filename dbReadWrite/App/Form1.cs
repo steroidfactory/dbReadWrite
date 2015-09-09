@@ -231,8 +231,13 @@ namespace App
             int countNum = PackingDB.Count();
             for (int i = 0; i < countNum; i++)
             {
-                addReadBox(PackingDB.Select()[0][i], PackingDB.Select()[1][i], PackingDB.Select()[2][i],
-                    PackingDB.Select()[3][i], PackingDB.Select()[4][i], PackingDB.Select()[5][i]);
+               if (PackingDB.Select()[6][i] == "")
+               {
+                    addReadBox(PackingDB.Select()[0][i], PackingDB.Select()[1][i], PackingDB.Select()[2][i],
+                     PackingDB.Select()[3][i], PackingDB.Select()[4][i], PackingDB.Select()[5][i]);
+               }
+
+                
             }
             readBox.Sort(readTimeIn, ListSortDirection.Descending);
         }
@@ -456,6 +461,16 @@ namespace App
                 inputInventoryAddHeight.Clear();
                 inputInventoryAddQT.Clear();
                 updateQTList();
+            }
+        }
+
+        private void readBox_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int orderNumber = Int32.Parse(readBox.Rows[readBox.CurrentCell.RowIndex].Cells[2].Value.ToString());
+            if (PackingDB.SelectByOrder(orderNumber)[3][0] == "1337")
+            {
+                PackingDB.closeOrder(orderNumber.ToString());
+                updateTable();
             }
         }
     }

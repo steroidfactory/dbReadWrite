@@ -63,17 +63,17 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.panelInventoryAdd = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.inputInventoryAddHeight = new System.Windows.Forms.TextBox();
+            this.inputInventoryAddWidth = new System.Windows.Forms.TextBox();
             this.inputInventoryAddQT = new System.Windows.Forms.TextBox();
             this.btnInventoryAddDone = new System.Windows.Forms.Button();
             this.inputInventoryAddLength = new System.Windows.Forms.TextBox();
             this.btnInventoryAddAdd = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
-            this.inputInventoryAddWidth = new System.Windows.Forms.TextBox();
-            this.inputInventoryAddHeight = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.readBox)).BeginInit();
             this.panelReadBox.SuspendLayout();
             this.panelOrderStatus.SuspendLayout();
@@ -112,6 +112,7 @@
             this.readBox.TabIndex = 11;
             this.readBox.TabStop = false;
             this.readBox.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.readBox_CellMouseClick);
+            this.readBox.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.readBox_RowHeaderMouseDoubleClick);
             // 
             // readDM
             // 
@@ -468,6 +469,56 @@
             this.panelInventoryAdd.Size = new System.Drawing.Size(164, 152);
             this.panelInventoryAdd.TabIndex = 23;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(124, 50);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(22, 13);
+            this.label14.TabIndex = 31;
+            this.label14.Text = "QT";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(74, 50);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(15, 13);
+            this.label13.TabIndex = 30;
+            this.label13.Text = "H";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(42, 50);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(18, 13);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "W";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(11, 50);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(13, 13);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "L";
+            // 
+            // inputInventoryAddHeight
+            // 
+            this.inputInventoryAddHeight.Location = new System.Drawing.Point(66, 66);
+            this.inputInventoryAddHeight.Name = "inputInventoryAddHeight";
+            this.inputInventoryAddHeight.Size = new System.Drawing.Size(23, 20);
+            this.inputInventoryAddHeight.TabIndex = 27;
+            // 
+            // inputInventoryAddWidth
+            // 
+            this.inputInventoryAddWidth.Location = new System.Drawing.Point(37, 66);
+            this.inputInventoryAddWidth.Name = "inputInventoryAddWidth";
+            this.inputInventoryAddWidth.Size = new System.Drawing.Size(23, 20);
+            this.inputInventoryAddWidth.TabIndex = 26;
+            // 
             // inputInventoryAddQT
             // 
             this.inputInventoryAddQT.Location = new System.Drawing.Point(118, 66);
@@ -511,56 +562,6 @@
             this.label10.Size = new System.Drawing.Size(167, 36);
             this.label10.TabIndex = 17;
             this.label10.Text = "Add Invent.";
-            // 
-            // inputInventoryAddWidth
-            // 
-            this.inputInventoryAddWidth.Location = new System.Drawing.Point(37, 66);
-            this.inputInventoryAddWidth.Name = "inputInventoryAddWidth";
-            this.inputInventoryAddWidth.Size = new System.Drawing.Size(23, 20);
-            this.inputInventoryAddWidth.TabIndex = 26;
-            // 
-            // inputInventoryAddHeight
-            // 
-            this.inputInventoryAddHeight.Location = new System.Drawing.Point(66, 66);
-            this.inputInventoryAddHeight.Name = "inputInventoryAddHeight";
-            this.inputInventoryAddHeight.Size = new System.Drawing.Size(23, 20);
-            this.inputInventoryAddHeight.TabIndex = 27;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(11, 50);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(13, 13);
-            this.label11.TabIndex = 28;
-            this.label11.Text = "L";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(42, 50);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(18, 13);
-            this.label12.TabIndex = 29;
-            this.label12.Text = "W";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(74, 50);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(15, 13);
-            this.label13.TabIndex = 30;
-            this.label13.Text = "H";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(124, 50);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(22, 13);
-            this.label14.TabIndex = 31;
-            this.label14.Text = "QT";
             // 
             // Form1
             // 
