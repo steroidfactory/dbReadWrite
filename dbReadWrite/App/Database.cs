@@ -11,12 +11,14 @@ namespace App
     {
         private MySqlConnection connection;
         private MySqlConnection connectionInventory;
+        private MySqlConnection connectionEmployees;
         private string server;
         private string database;
         private string uid;
         private string password;
         private string tableOrders;
         private string tableInventory;
+        private string tableEmployees;
 
 
         public void initDB()
@@ -38,8 +40,10 @@ namespace App
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";" + "Convert Zero Datetime=True;";
             connection = new MySqlConnection(connectionString);
             connectionInventory = new MySqlConnection(connectionString);
+            connectionEmployees = new MySqlConnection(connectionString);
             tableOrders = "packing_orders";
             tableInventory = "packing_inventory";
+            tableEmployees = "employees";
         }
 
 
@@ -133,6 +137,38 @@ namespace App
             }
         }
 
+        private bool OpenConnectionEmployees()
+        {
+            try
+            {
+                if (connectionEmployees.State == System.Data.ConnectionState.Closed)
+                {
+                    connectionEmployees.Open();
+                    return true;
+                }
+                else if (connectionEmployees.State == System.Data.ConnectionState.Open)
+                {
+                    return true;
+                }
+                if (connectionEmployees.State == System.Data.ConnectionState.Closed)
+                {
+                    return false;
+                }
+                return true;
+
+            }
+            catch (MySqlException ex)
+            {
+                //When handling errors, you can your application's response based 
+                //on the error number.
+                //The two most common error numbers when connecting are as follows:
+                //0: Cannot connect to server.
+                //1045: Invalid user name and/or password.
+                Console.WriteLine("Error in open connection is : " + ex);
+                return false;
+
+            }
+        }
 
         //Close connection
         private bool CloseConnectionInventory()
@@ -652,7 +688,163 @@ namespace App
             }
         }
 
+        public int CountInventoryDM(string Dimensions)
+        {
+            string query = "SELECT Count(*) FROM " + tableInventory + " WHERE Dimensions = " + "'" + Dimensions + "'" + ";";
+            int Count = 0;
+
+            //Open Connection
+            if (OpenConnection() == true)
+            {
+                //Create Mysql Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                //ExecuteScalar will return one value
+                Count = int.Parse(cmd.ExecuteScalar() + "");
+
+                //close Connection
+                CloseConnectionInventory();
+
+                return Count;
+            }
+            else
+            {
+                return Count;
+            }
+        }
+
+        public void addInventory(string dimensions, int QT)
+        {
+            try
+            {
+                ;
+            }
+            catch
+            {
+                ;
+            }
+        }
+
+        public List<string>[] checkEmployee(string ID)
+        {
+            string query = "SELECT * FROM " + tableEmployees + " WHERE ID = '" + ID + "';";
+            //int countNum = Count();
+            //Create a list to store the result
+            List<string>[] list = new List<string>[6];
+
+            list[0] = new List<string>();
+            list[1] = new List<string>();
+            list[2] = new List<string>();
+            list[3] = new List<string>();
+            list[4] = new List<string>();
+            list[5] = new List<string>();
+            //}
+            //Open connection
+            if (OpenConnectionEmployees() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connectionEmployees);
+                //Create a data reader and Execute the command
+                // MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                using (MySqlDataReader dataReader = cmd.ExecuteReader())
+                {
+                    while (dataReader.Read())
+                    {
+                        list[0].Add(dataReader["ID"] + "");
+                        list[1].Add(dataReader["FirstName"] + "");
+                        list[2].Add(dataReader["LastName"] + "");
+                        list[3].Add(dataReader["Initial"] + "");
+                        list[4].Add(dataReader["Department"] + "");
+                        list[5].Add(dataReader["Access"] + "");
+                    }
+                    //close Data Reader
+                    dataReader.Close();
+
+                    //close Connection
+                    CloseConnection();
+                }
+                //return list to be displayed
+                return list;
+            }
+            else
+            {
+                return list;
+            }
+        }
+
+        
+
+        public void inventoryAdd(string Dimensions, string QT)
+        {
+            try
+            {
+                string query = "";
+                if (CountInventoryDM(Dimensions) == 1)
+                {
+                    query = "UPDATE " + tableInventory + " SET QT = QT + " + QT + " WHERE Dimensions = " + "'" + Dimensions + "'" + ";";
+                    //open connection
+                    if (OpenConnectionInventory() == true)
+                    {
+                        try
+                        {
+                            //create command and assign the query and connection from the constructor
+                            MySqlCommand cmd = new MySqlCommand(query, connectionInventory);
+                            //Execute command
+                            cmd.ExecuteNonQuery();
+
+                            //close connection
+                            CloseConnection();
+                        }
+                        catch (MySqlException s)
+                        {
+
+                        }
+                    }
+                }
+                else if (CountInventoryDM(Dimensions) == 0)
+                {
+                    Console.WriteLine("ADDING NEW LINE");
+                    query = "INSERT INTO " + tableInventory + " (Dimensions, QT)" + " VALUES(" + "'" + Dimensions + "'" + ", " + QT +  ");";
+                    Console.WriteLine(query);
+                    //open connection
+                    if (OpenConnectionInventory() == true)
+                    {
+                        try
+                        {
+                            //create command and assign the query and connection from the constructor
+                            MySqlCommand cmd = new MySqlCommand(query, connectionInventory);
+                            //Execute command
+                            cmd.ExecuteNonQuery();
+
+                            //close connection
+                            CloseConnection();
+                        }
+                        catch (MySqlException s)
+                        {
+
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
-
 }

@@ -53,17 +53,36 @@
             this.inputOrderNumber = new System.Windows.Forms.TextBox();
             this.listQT = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelInventory = new System.Windows.Forms.Panel();
             this.btnInventoryAdd = new System.Windows.Forms.Button();
             this.btnInventoryCheck = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.panelLogin = new System.Windows.Forms.Panel();
+            this.btnLoginCancel = new System.Windows.Forms.Button();
+            this.inputLogin = new System.Windows.Forms.TextBox();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.panelInventoryAdd = new System.Windows.Forms.Panel();
+            this.inputInventoryAddQT = new System.Windows.Forms.TextBox();
+            this.btnInventoryAddDone = new System.Windows.Forms.Button();
+            this.inputInventoryAddLength = new System.Windows.Forms.TextBox();
+            this.btnInventoryAddAdd = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.inputInventoryAddWidth = new System.Windows.Forms.TextBox();
+            this.inputInventoryAddHeight = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.readBox)).BeginInit();
             this.panelReadBox.SuspendLayout();
             this.panelOrderStatus.SuspendLayout();
             this.panelInput.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelInventory.SuspendLayout();
+            this.panelLogin.SuspendLayout();
+            this.panelInventoryAdd.SuspendLayout();
             this.SuspendLayout();
             // 
             // readBox
@@ -304,6 +323,7 @@
             this.inputEmployee.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inputEmployee.Location = new System.Drawing.Point(275, 51);
             this.inputEmployee.Name = "inputEmployee";
+            this.inputEmployee.PasswordChar = '*';
             this.inputEmployee.Size = new System.Drawing.Size(138, 20);
             this.inputEmployee.TabIndex = 2;
             this.inputEmployee.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input2_KeyDown);
@@ -339,16 +359,16 @@
             this.label7.Text = "DM";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel1
+            // panelInventory
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.btnInventoryAdd);
-            this.panel1.Controls.Add(this.btnInventoryCheck);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Location = new System.Drawing.Point(809, 27);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(164, 152);
-            this.panel1.TabIndex = 21;
+            this.panelInventory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelInventory.Controls.Add(this.btnInventoryAdd);
+            this.panelInventory.Controls.Add(this.btnInventoryCheck);
+            this.panelInventory.Controls.Add(this.label8);
+            this.panelInventory.Location = new System.Drawing.Point(809, 27);
+            this.panelInventory.Name = "panelInventory";
+            this.panelInventory.Size = new System.Drawing.Size(164, 152);
+            this.panelInventory.TabIndex = 21;
             // 
             // btnInventoryAdd
             // 
@@ -382,12 +402,176 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(361, 191);
+            this.button1.Location = new System.Drawing.Point(330, 185);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 22;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // panelLogin
+            // 
+            this.panelLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelLogin.Controls.Add(this.btnLoginCancel);
+            this.panelLogin.Controls.Add(this.inputLogin);
+            this.panelLogin.Controls.Add(this.btnLogin);
+            this.panelLogin.Controls.Add(this.label9);
+            this.panelLogin.Location = new System.Drawing.Point(809, 26);
+            this.panelLogin.Name = "panelLogin";
+            this.panelLogin.Size = new System.Drawing.Size(164, 152);
+            this.panelLogin.TabIndex = 22;
+            // 
+            // btnLoginCancel
+            // 
+            this.btnLoginCancel.Location = new System.Drawing.Point(84, 103);
+            this.btnLoginCancel.Name = "btnLoginCancel";
+            this.btnLoginCancel.Size = new System.Drawing.Size(70, 33);
+            this.btnLoginCancel.TabIndex = 22;
+            this.btnLoginCancel.Text = "Cancel";
+            this.btnLoginCancel.UseVisualStyleBackColor = true;
+            this.btnLoginCancel.Click += new System.EventHandler(this.btnLoginCancel_Click);
+            // 
+            // inputLogin
+            // 
+            this.inputLogin.Location = new System.Drawing.Point(37, 66);
+            this.inputLogin.Name = "inputLogin";
+            this.inputLogin.PasswordChar = '*';
+            this.inputLogin.Size = new System.Drawing.Size(93, 20);
+            this.inputLogin.TabIndex = 21;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(8, 103);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(70, 33);
+            this.btnLogin.TabIndex = 20;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F);
+            this.label9.Location = new System.Drawing.Point(40, 14);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(90, 36);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Login";
+            // 
+            // panelInventoryAdd
+            // 
+            this.panelInventoryAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelInventoryAdd.Controls.Add(this.label14);
+            this.panelInventoryAdd.Controls.Add(this.label13);
+            this.panelInventoryAdd.Controls.Add(this.label12);
+            this.panelInventoryAdd.Controls.Add(this.label11);
+            this.panelInventoryAdd.Controls.Add(this.inputInventoryAddHeight);
+            this.panelInventoryAdd.Controls.Add(this.inputInventoryAddWidth);
+            this.panelInventoryAdd.Controls.Add(this.inputInventoryAddQT);
+            this.panelInventoryAdd.Controls.Add(this.btnInventoryAddDone);
+            this.panelInventoryAdd.Controls.Add(this.inputInventoryAddLength);
+            this.panelInventoryAdd.Controls.Add(this.btnInventoryAddAdd);
+            this.panelInventoryAdd.Controls.Add(this.label10);
+            this.panelInventoryAdd.Location = new System.Drawing.Point(809, 26);
+            this.panelInventoryAdd.Name = "panelInventoryAdd";
+            this.panelInventoryAdd.Size = new System.Drawing.Size(164, 152);
+            this.panelInventoryAdd.TabIndex = 23;
+            // 
+            // inputInventoryAddQT
+            // 
+            this.inputInventoryAddQT.Location = new System.Drawing.Point(118, 66);
+            this.inputInventoryAddQT.Name = "inputInventoryAddQT";
+            this.inputInventoryAddQT.Size = new System.Drawing.Size(36, 20);
+            this.inputInventoryAddQT.TabIndex = 25;
+            // 
+            // btnInventoryAddDone
+            // 
+            this.btnInventoryAddDone.Location = new System.Drawing.Point(84, 103);
+            this.btnInventoryAddDone.Name = "btnInventoryAddDone";
+            this.btnInventoryAddDone.Size = new System.Drawing.Size(70, 33);
+            this.btnInventoryAddDone.TabIndex = 22;
+            this.btnInventoryAddDone.Text = "Done";
+            this.btnInventoryAddDone.UseVisualStyleBackColor = true;
+            this.btnInventoryAddDone.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // inputInventoryAddLength
+            // 
+            this.inputInventoryAddLength.Location = new System.Drawing.Point(8, 66);
+            this.inputInventoryAddLength.Name = "inputInventoryAddLength";
+            this.inputInventoryAddLength.Size = new System.Drawing.Size(23, 20);
+            this.inputInventoryAddLength.TabIndex = 21;
+            // 
+            // btnInventoryAddAdd
+            // 
+            this.btnInventoryAddAdd.Location = new System.Drawing.Point(8, 103);
+            this.btnInventoryAddAdd.Name = "btnInventoryAddAdd";
+            this.btnInventoryAddAdd.Size = new System.Drawing.Size(70, 33);
+            this.btnInventoryAddAdd.TabIndex = 20;
+            this.btnInventoryAddAdd.Text = "Add";
+            this.btnInventoryAddAdd.UseVisualStyleBackColor = true;
+            this.btnInventoryAddAdd.Click += new System.EventHandler(this.btnInventoryAddAdd_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F);
+            this.label10.Location = new System.Drawing.Point(3, 14);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(167, 36);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Add Invent.";
+            // 
+            // inputInventoryAddWidth
+            // 
+            this.inputInventoryAddWidth.Location = new System.Drawing.Point(37, 66);
+            this.inputInventoryAddWidth.Name = "inputInventoryAddWidth";
+            this.inputInventoryAddWidth.Size = new System.Drawing.Size(23, 20);
+            this.inputInventoryAddWidth.TabIndex = 26;
+            // 
+            // inputInventoryAddHeight
+            // 
+            this.inputInventoryAddHeight.Location = new System.Drawing.Point(66, 66);
+            this.inputInventoryAddHeight.Name = "inputInventoryAddHeight";
+            this.inputInventoryAddHeight.Size = new System.Drawing.Size(23, 20);
+            this.inputInventoryAddHeight.TabIndex = 27;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(11, 50);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(13, 13);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "L";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(42, 50);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(18, 13);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "W";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(74, 50);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(15, 13);
+            this.label13.TabIndex = 30;
+            this.label13.Text = "H";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(124, 50);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(22, 13);
+            this.label14.TabIndex = 31;
+            this.label14.Text = "QT";
             // 
             // Form1
             // 
@@ -397,10 +581,12 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1008, 682);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelInput);
-            this.Controls.Add(this.panelOrderStatus);
             this.Controls.Add(this.panelReadBox);
+            this.Controls.Add(this.panelLogin);
+            this.Controls.Add(this.panelInventory);
+            this.Controls.Add(this.panelOrderStatus);
+            this.Controls.Add(this.panelInventoryAdd);
             this.Name = "Form1";
             this.Padding = new System.Windows.Forms.Padding(20);
             this.Text = "Form1";
@@ -412,8 +598,12 @@
             this.panelInput.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelInventory.ResumeLayout(false);
+            this.panelInventory.PerformLayout();
+            this.panelLogin.ResumeLayout(false);
+            this.panelLogin.PerformLayout();
+            this.panelInventoryAdd.ResumeLayout(false);
+            this.panelInventoryAdd.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -444,11 +634,28 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn readID;
         private System.Windows.Forms.DataGridViewTextBoxColumn readTrackingNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn readTimeIn;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelInventory;
         private System.Windows.Forms.Button btnInventoryAdd;
         private System.Windows.Forms.Button btnInventoryCheck;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panelLogin;
+        private System.Windows.Forms.Button btnLoginCancel;
+        private System.Windows.Forms.TextBox inputLogin;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel panelInventoryAdd;
+        private System.Windows.Forms.Button btnInventoryAddDone;
+        private System.Windows.Forms.TextBox inputInventoryAddLength;
+        private System.Windows.Forms.Button btnInventoryAddAdd;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox inputInventoryAddQT;
+        private System.Windows.Forms.TextBox inputInventoryAddHeight;
+        private System.Windows.Forms.TextBox inputInventoryAddWidth;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
     }
 }
 

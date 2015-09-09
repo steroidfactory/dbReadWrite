@@ -48,6 +48,7 @@ namespace App
             updateDMList();
             readBox.ClearSelection();
             inputOrderNumber.Focus();
+            inventoryShow("");
         }
 
         private void updateDMList()
@@ -113,8 +114,11 @@ namespace App
                 {
                     if (PackingDB.checkIsDuplicateOrder(inputOrderNumber.Text.ToString()) == false)
                     {
-                        PackingDB.Insert(listDM.Text, listQT.SelectedIndex + 1, inputOrderNumber.Text, inputEmployee.Text, inputTracking.Text);
-                        PackingDB.removeFromInventory(listDM.Text, Int32.Parse(listQT.Text));
+                        if (PackingDB.checkEmployee(inputEmployee.Text)[3][0] != "" && Authentication(inputEmployee.Text) >= 1)
+                        {
+                            PackingDB.Insert(listDM.Text, listQT.SelectedIndex + 1, inputOrderNumber.Text, inputEmployee.Text, inputTracking.Text);
+                            PackingDB.removeFromInventory(listDM.Text, Int32.Parse(listQT.Text));
+                        }
                         resetInput();
                         updateDMList();
                         updateQTList();
@@ -140,7 +144,8 @@ namespace App
                 }
                 catch
                 {
-                    Console.WriteLine("Error on enter");
+                    MessageBox.Show("Unauthorized User");
+                    resetInput();
                 }
                 }
 
@@ -163,10 +168,7 @@ namespace App
         //
         private void addReadBox(string Dimensions, string QT, string orderNumber, string ID, string trackingNumber, string timeIn)
         {
-            if (ID == "1333")
-            {
-                ID = "Sashko";
-            }
+            ID = PackingDB.checkEmployee(ID)[3][0];
             string[] data = { Dimensions.ToString(), QT.ToString(), orderNumber.ToString(),
                 ID.ToString(), trackingNumber.ToString(), timeIn.ToString() };
             readBox.Rows.Add(data);
@@ -258,7 +260,11 @@ namespace App
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
-            checkOrder();
+            if (inputOrderStatus.Text != "")
+            {
+                checkOrder();
+            }
+           
         }
 
 
@@ -266,15 +272,20 @@ namespace App
         {
             if (e.KeyCode == Keys.Enter)
             {
-                checkOrder();
+                if (inputOrderStatus.Text != "")
+                {
+                    checkOrder();
+                }
+                    
             }
         }
 
         private void checkOrder()
         {
             int orderNumber = Int32.Parse(inputOrderStatus.Text);
+            string employee = PackingDB.SelectByOrder(orderNumber)[3][0];
             MessageBox.Show(
-                "Order Number: " +  orderNumber
+                "Order Number: " + orderNumber
                 + Environment.NewLine +
                 "Quantity: " + PackingDB.SelectByOrder(orderNumber)[1][0]
                 + Environment.NewLine +
@@ -282,7 +293,7 @@ namespace App
                 + Environment.NewLine +
                 PackingDB.statusOrder(inputOrderStatus.Text.ToString())
                 + Environment.NewLine +
-                "Employee: " + PackingDB.SelectByOrder(orderNumber)[3][0]
+                "Employee: " + PackingDB.checkEmployee(employee)[3][0]
                 + Environment.NewLine +
                 "Time In: " + PackingDB.SelectByOrder(orderNumber)[5][0]
                 + Environment.NewLine +
@@ -335,7 +346,8 @@ namespace App
 
         private void btnInventoryAdd_Click_1(object sender, EventArgs e)
         {
-            
+            inventoryShow("login");
+            //PackingDB.inventoryAdd("1x1x5", "5");
         }
 
         private void listDM_SelectedValueChanged(object sender, EventArgs e)
@@ -356,5 +368,90 @@ namespace App
             }
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+        
+        }
+
+        private int Authentication(string ID)
+        {
+            try
+            {
+                if (PackingDB.checkEmployee(ID)[3][0] != "")
+                {
+                    return Int32.Parse(PackingDB.checkEmployee(ID)[5][0]);
+                }
+                inputLogin.Clear();
+                return 0;
+            }
+            catch
+            {
+                MessageBox.Show("Unauthorized User");
+                inputLogin.Clear();
+                return 0;
+            }
+            
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (Authentication(inputLogin.Text) >= 3)
+            {
+                inventoryShow("inventoryAdd");
+            }
+        }
+
+        private void inventoryShow(string window)
+        {
+            //Login panel
+            if (window == "login")
+            {
+                panelInventory.Visible = false;
+                panelLogin.Visible = true;
+                panelInventoryAdd.Visible = false;
+            }
+
+            //Add to inventory panel
+            else if (window == "inventoryAdd")
+            {
+                panelInventory.Visible = false;
+                panelLogin.Visible = false;
+                panelInventoryAdd.Visible = true;
+            }
+
+            //Main inventory panel
+            else
+            {
+                panelInventory.Visible = true;
+                panelLogin.Visible = false;
+                panelInventoryAdd.Visible = false;
+            }
+
+        }
+
+        private void btnLoginCancel_Click(object sender, EventArgs e)
+        {
+            inventoryShow("");
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            inventoryShow("");
+        }
+
+        private void btnInventoryAddAdd_Click(object sender, EventArgs e)
+        {
+            string dim = "";
+            if (inputInventoryAddLength.Text != "" && inputInventoryAddWidth.Text != "" && inputInventoryAddHeight.Text != "" && inputInventoryAddQT.Text != "")
+            {
+                dim = (inputInventoryAddLength.Text + "x" + inputInventoryAddWidth.Text + "x" + inputInventoryAddHeight.Text);
+                PackingDB.inventoryAdd(dim, inputInventoryAddQT.Text);
+                inputInventoryAddLength.Clear();
+                inputInventoryAddWidth.Clear();
+                inputInventoryAddHeight.Clear();
+                inputInventoryAddQT.Clear();
+                updateQTList();
+            }
+        }
     }
 }
