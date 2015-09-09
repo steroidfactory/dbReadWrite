@@ -20,7 +20,8 @@ namespace App
             PackingDB.initDB();
             setupWindow();
             addTable();
-            
+            panelMain.Visible = true;
+            panelReports.Visible = false;
         }
 
         //public Dictionary<int, List<string>> portsText = new Dictionary<int, List<string>>();
@@ -60,6 +61,7 @@ namespace App
                 {
                     listDM.Items.Clear();
                 }
+                
 
                 for (int i = 0; i < PackingDB.CountInventory(); i++)
                 {
@@ -69,8 +71,8 @@ namespace App
             }
             catch
             {
-                InputDisable(); 
-                MessageBox.Show("Inventory is empty");
+                InputDisable();
+                listDM.Enabled = true; 
             }
 
 
@@ -149,7 +151,7 @@ namespace App
                 }
                 }
 
-        }
+        }    
 
         //
         //  Resets Input
@@ -272,7 +274,6 @@ namespace App
            
         }
 
-
         private void inputOrderStatus_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -288,30 +289,33 @@ namespace App
         private void checkOrder()
         {
             int orderNumber = Int32.Parse(inputOrderStatus.Text);
-            string employee = PackingDB.SelectByOrder(orderNumber)[3][0];
-            MessageBox.Show(
-                "Order Number: " + orderNumber
-                + Environment.NewLine +
-                "Quantity: " + PackingDB.SelectByOrder(orderNumber)[1][0]
-                + Environment.NewLine +
-                "Dimentions: " + PackingDB.SelectByOrder(orderNumber)[0][0]
-                + Environment.NewLine +
-                PackingDB.statusOrder(inputOrderStatus.Text.ToString())
-                + Environment.NewLine +
-                "Employee: " + PackingDB.checkEmployee(employee)[3][0]
-                + Environment.NewLine +
-                "Time In: " + PackingDB.SelectByOrder(orderNumber)[5][0]
-                + Environment.NewLine +
-                "Time Out: " + PackingDB.SelectByOrder(orderNumber)[6][0]
-                + Environment.NewLine +
-                "Tracking Number: " + PackingDB.SelectByOrder(orderNumber)[4][0]
-                );
+            try
+            {
+                string employee = PackingDB.SelectByOrder(orderNumber)[3][0];
+                MessageBox.Show(
+                    "Order Number: " + orderNumber
+                    + Environment.NewLine +
+                    "Quantity: " + PackingDB.SelectByOrder(orderNumber)[1][0]
+                    + Environment.NewLine +
+                    "Dimentions: " + PackingDB.SelectByOrder(orderNumber)[0][0]
+                    + Environment.NewLine +
+                    PackingDB.statusOrder(inputOrderStatus.Text.ToString())
+                    + Environment.NewLine +
+                    "Employee: " + PackingDB.checkEmployee(employee)[3][0]
+                    + Environment.NewLine +
+                    "Time In: " + PackingDB.SelectByOrder(orderNumber)[5][0]
+                    + Environment.NewLine +
+                    "Time Out: " + PackingDB.SelectByOrder(orderNumber)[6][0]
+                    + Environment.NewLine +
+                    "Tracking Number: " + PackingDB.SelectByOrder(orderNumber)[4][0]
+                    );
+            }
+            catch
+            {
+                MessageBox.Show("Order Does Not Exist");
+            }
+            
             inputOrderStatus.Clear();
-        }
-
-        private void displayInventory()
-        {
-
         }
         
         private void InputDisable()
@@ -365,17 +369,22 @@ namespace App
             listQT.Items.Clear();
             if (listDM.Text != "")
             {
-                for (int i = 1; i <= Int32.Parse(PackingDB.SelectInventoryQT(listDM.Text)[1][0]); i++)
+                if (PackingDB.SelectInventoryQT(listDM.Text)[1][0] != "0")
                 {
-                    listQT.Items.Add(i);
+                    InputEnable();
+                    for (int i = 1; i <= Int32.Parse(PackingDB.SelectInventoryQT(listDM.Text)[1][0]); i++)
+                    {
+                        listQT.Items.Add(i);
+                    }
+                    listQT.SelectedIndex = 0;
                 }
-                listQT.SelectedIndex = 0;
+                else if (PackingDB.SelectInventoryQT(listDM.Text)[1][0] == "0")
+                    {
+                    InputDisable();
+                    listQT.Text = "0";
+                    listDM.Enabled = true;
+                    }
             }
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-        
         }
 
         private int Authentication(string ID)
@@ -467,11 +476,68 @@ namespace App
         private void readBox_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             int orderNumber = Int32.Parse(readBox.Rows[readBox.CurrentCell.RowIndex].Cells[2].Value.ToString());
-            if (PackingDB.SelectByOrder(orderNumber)[3][0] == "1337")
+            
+            //
+            using (authenticationID checkID = new authenticationID())
             {
-                PackingDB.closeOrder(orderNumber.ToString());
-                updateTable();
+                var result = checkID.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string ID = checkID.ID;
+                    if (PackingDB.SelectByOrder(orderNumber)[3][0] == ID)
+                    {
+                        PackingDB.closeOrder(orderNumber.ToString());
+                        updateTable();
+                    }
+                    else if (PackingDB.SelectByOrder(orderNumber)[3][0] != ID)
+                    {
+                        MessageBox.Show("Invalid Employee ID Entered");
+                    }
+                }
+            };
+            
+        }
+
+        private void readBox_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.F12)
+            {
+                using (authenticationID checkID = new authenticationID())
+                {
+                    var result = checkID.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        string ID = checkID.ID;
+
+                        try
+                        {
+                            if (Int32.Parse(PackingDB.checkEmployee(ID)[5][0]) >= 3)
+                            {
+                                Console.WriteLine("granted");
+                            }
+                            else
+                            {
+                                MessageBox.Show("You shouldn't be here");
+                            }
+
+                        }
+                        catch
+                        {
+                            MessageBox.Show("You shouldn't be here");
+                        }
+                       
+
+                    }
+
+                };
             }
         }
+
+        private void readBox_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            Console.WriteLine(readBox.Rows[readBox.CurrentCell.RowIndex].Cells[3]);
+        }
+
     }
 }

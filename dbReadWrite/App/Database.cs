@@ -71,7 +71,7 @@ namespace App
                 return true;
 
             }
-            catch (MySqlException ex)
+            catch
             {
                 //When handling errors, you can your application's response based 
                 //on the error number.
@@ -94,7 +94,7 @@ namespace App
                 connection.Close();
                 return true;
             }
-            catch (MySqlException ex)
+            catch
             {
                 //Console.WriteLine("Error in close connection: " + ex);
                 //MessageBox.Show(ex.Message);
@@ -124,7 +124,7 @@ namespace App
                 return true;
 
             }
-            catch (MySqlException ex)
+            catch
             {
                 //When handling errors, you can your application's response based 
                 //on the error number.
@@ -157,7 +157,7 @@ namespace App
                 return true;
 
             }
-            catch (MySqlException ex)
+            catch 
             {
                 //When handling errors, you can your application's response based 
                 //on the error number.
@@ -179,7 +179,7 @@ namespace App
                 connectionInventory.Close();
                 return true;
             }
-            catch (MySqlException ex)
+            catch
             {
                // Console.WriteLine("Error in close connection: " + ex);
                 //MessageBox.Show(ex.Message);
@@ -819,7 +819,7 @@ namespace App
                             //close connection
                             CloseConnection();
                         }
-                        catch (MySqlException s)
+                        catch 
                         {
 
                         }
@@ -843,7 +843,7 @@ namespace App
                             //close connection
                             CloseConnection();
                         }
-                        catch (MySqlException s)
+                        catch
                         {
 
                         }
