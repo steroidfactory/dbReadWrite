@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace App
 {
     public partial class Form1 : Form
@@ -713,6 +712,13 @@ namespace App
         private void inputUpdateTrackingNew_KeyDown(object sender, KeyEventArgs e)
         {
             updateTracking();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            DataTable dtFromGrid = new DataTable();
+            dtFromGrid = readBox.DataSource as DataTable;
+            ExportToExcel.CreateExcelFile.CreateExcelDocument(dtFromGrid, "C:\\Sample.xlsx");
         }
 
 
