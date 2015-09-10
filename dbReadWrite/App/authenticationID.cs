@@ -60,5 +60,17 @@ namespace App
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        private void inputLoginID_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(inputLoginID.Text, "[^0-9]"))
+            {
+                inputLoginID.Clear();
+                MessageBox.Show("Please use your scanner or input numbers only");
+                //inputOrderNumber.Text.Remove(inputOrderNumber.Text.Length - 1);
+
+                //resetInput();
+            }
+        }
     }
 }

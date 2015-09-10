@@ -41,6 +41,7 @@
             this.inputLoginID.PasswordChar = '*';
             this.inputLoginID.Size = new System.Drawing.Size(100, 20);
             this.inputLoginID.TabIndex = 0;
+            this.inputLoginID.TextChanged += new System.EventHandler(this.inputLoginID_TextChanged);
             this.inputLoginID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputLoginID_KeyDown);
             // 
             // btnLoginID

@@ -61,8 +61,6 @@ namespace App
                 {
                     listDM.Items.Clear();
                 }
-                
-
                 for (int i = 0; i < PackingDB.CountInventory(); i++)
                 {
                     listDM.Items.Add(PackingDB.SelectInventory()[0][i].ToString());
@@ -180,7 +178,6 @@ namespace App
         {
 
             string[] data = { Dimensions.ToString(), QT.ToString() };
-             
             readBox.Rows.Add(data);
         }
 
@@ -258,11 +255,17 @@ namespace App
 
         private void input1_TextChanged(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(inputOrderNumber.Text, "[^0-9]"))
+            inputNumbersOnly(inputOrderNumber);
+        }
+        private void inputNumbersOnly(TextBox inputTextbox)
+        {
+             if (System.Text.RegularExpressions.Regex.IsMatch(inputTextbox.Text, "[^0-9]"))
             {
-                MessageBox.Show("Congradulations! You didn't use a scanner and now you broke it.");
-                inputOrderNumber.Text.Remove(inputOrderNumber.Text.Length - 1);
-                resetInput();
+                inputTextbox.Clear();
+                MessageBox.Show("Please use your scanner or input numbers only");
+                //inputOrderNumber.Text.Remove(inputOrderNumber.Text.Length - 1);
+                
+             //resetInput();
             }
         }
 
@@ -365,7 +368,7 @@ namespace App
         private void btnInventoryAdd_Click_1(object sender, EventArgs e)
         {
             inventoryShow("login");
-            //PackingDB.inventoryAdd("1x1x5", "5");
+            inputLogin.Focus();
         }
 
         private void listDM_SelectedValueChanged(object sender, EventArgs e)
@@ -417,16 +420,7 @@ namespace App
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (Authentication(inputLogin.Text) >= 2)
-            {
-                inputLogin.Clear();
-                inventoryShow("inventoryAdd");
-            }
-            else
-            {
-                inputLogin.Clear();
-                MessageBox.Show("Unauthorized User");
-            }
+            inventoryAddLogin();
         }
 
         private void inventoryShow(string window)
@@ -469,6 +463,10 @@ namespace App
 
         private void btnInventoryAddAdd_Click(object sender, EventArgs e)
         {
+            addInventory();
+        }
+        private void addInventory()
+        {
             string dim = "";
             if (inputInventoryAddLength.Text != "" && inputInventoryAddWidth.Text != "" && inputInventoryAddHeight.Text != "" && inputInventoryAddQT.Text != "")
             {
@@ -478,7 +476,9 @@ namespace App
                 inputInventoryAddWidth.Clear();
                 inputInventoryAddHeight.Clear();
                 inputInventoryAddQT.Clear();
+                updateDMList();
                 updateQTList();
+                inputInventoryAddLength.Focus();
             }
         }
 
@@ -550,6 +550,11 @@ namespace App
 
         private void button4_Click(object sender, EventArgs e)
         {
+            updateTracking();
+        }
+
+        private void updateTracking()
+        {
             if (inputUpdateTrackingOrder.Text != "" && inputUpdateTrackingNew.Text != "")
             {
 
@@ -581,8 +586,8 @@ namespace App
                             }
                             catch { }
                         }
-                        
-                        }
+
+                    }
                 }
                 else
                 {
@@ -592,6 +597,125 @@ namespace App
                 }
             }
         }
+
+        private void inputInventoryAddLength_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                inputInventoryAddWidth.Focus();
+            }
+        }
+
+        private void inputInventoryAddWidth_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                inputInventoryAddHeight.Focus();
+            }
+        }
+
+        private void inputInventoryAddHeight_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                inputInventoryAddQT.Focus();
+            }
+        }
+
+        private void inputInventoryAddQT_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                addInventory();
+            }
+        }
+
+        private void inputLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                inventoryAddLogin();
+            }
+        }
+        private void inventoryAddLogin()
+        {
+            if (Authentication(inputLogin.Text) >= 2)
+            {
+                inputLogin.Clear();
+                inventoryShow("inventoryAdd");
+                inputInventoryAddLength.Focus();
+            }
+            else
+            {
+                inputLogin.Clear();
+                MessageBox.Show("Unauthorized User");
+            }
+        }
+
+        private void inputEmployee_TextChanged(object sender, EventArgs e)
+        {
+            inputNumbersOnly(inputEmployee);
+        }
+
+        private void inputTracking_TextChanged(object sender, EventArgs e)
+        {
+            inputNumbersOnly(inputTracking);
+        }
+
+        private void inputOrderStatus_TextChanged(object sender, EventArgs e)
+        {
+            inputNumbersOnly(inputOrderStatus);
+        }
+
+        private void inputUpdateTrackingOrder_TextChanged(object sender, EventArgs e)
+        {
+            inputNumbersOnly(inputUpdateTrackingOrder);
+        }
+
+        private void inputUpdateTrackingNew_TextChanged(object sender, EventArgs e)
+        {
+            inputNumbersOnly(inputUpdateTrackingNew);
+        }
+
+        private void inputLogin_TextChanged(object sender, EventArgs e)
+        {
+            inputNumbersOnly(inputLogin);
+        }
+
+        private void inputInventoryAddLength_TextChanged(object sender, EventArgs e)
+        {
+            inputNumbersOnly(inputInventoryAddLength);
+        }
+
+        private void inputInventoryAddWidth_TextChanged(object sender, EventArgs e)
+        {
+            inputNumbersOnly(inputInventoryAddWidth);
+        }
+
+        private void inputInventoryAddHeight_TextChanged(object sender, EventArgs e)
+        {
+            inputNumbersOnly(inputInventoryAddHeight);
+        }
+
+        private void inputInventoryAddQT_TextChanged(object sender, EventArgs e)
+        {
+            inputNumbersOnly(inputInventoryAddQT);
+        }
+
+        private void inputUpdateTrackingOrder_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                inputUpdateTrackingNew.Focus();
+            }
+        }
+
+        private void inputUpdateTrackingNew_KeyDown(object sender, KeyEventArgs e)
+        {
+            updateTracking();
+        }
+
+
 
         //END
     }

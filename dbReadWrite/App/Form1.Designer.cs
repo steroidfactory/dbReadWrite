@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelReadBox = new System.Windows.Forms.Panel();
             this.readBox = new System.Windows.Forms.DataGridView();
             this.readDM = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -87,6 +87,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelReports = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelReadBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.readBox)).BeginInit();
             this.panelOrderStatus.SuspendLayout();
@@ -98,6 +99,7 @@
             this.panelMain.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panelReports.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelReadBox
@@ -115,14 +117,14 @@
             this.readBox.AllowUserToDeleteRows = false;
             this.readBox.AllowUserToResizeColumns = false;
             this.readBox.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.readBox.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle43.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle43.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle43.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle43.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle43.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.readBox.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle43;
             this.readBox.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.readBox.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.readDM,
@@ -131,14 +133,14 @@
             this.readID,
             this.readTrackingNumber,
             this.readTimeIn});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.readBox.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle44.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle44.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle44.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle44.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle44.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle44.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.readBox.DefaultCellStyle = dataGridViewCellStyle44;
             this.readBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.readBox.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.readBox.GridColor = System.Drawing.SystemColors.HotTrack;
@@ -147,14 +149,14 @@
             this.readBox.MultiSelect = false;
             this.readBox.Name = "readBox";
             this.readBox.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.readBox.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle45.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle45.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle45.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle45.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle45.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle45.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.readBox.RowHeadersDefaultCellStyle = dataGridViewCellStyle45;
             this.readBox.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.readBox.Size = new System.Drawing.Size(613, 354);
             this.readBox.StandardTab = true;
@@ -234,6 +236,7 @@
             this.inputOrderStatus.Name = "inputOrderStatus";
             this.inputOrderStatus.Size = new System.Drawing.Size(93, 20);
             this.inputOrderStatus.TabIndex = 19;
+            this.inputOrderStatus.TextChanged += new System.EventHandler(this.inputOrderStatus_TextChanged);
             this.inputOrderStatus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputOrderStatus_KeyDown);
             // 
             // label6
@@ -359,6 +362,7 @@
             this.inputTracking.Name = "inputTracking";
             this.inputTracking.Size = new System.Drawing.Size(164, 20);
             this.inputTracking.TabIndex = 3;
+            this.inputTracking.TextChanged += new System.EventHandler(this.inputTracking_TextChanged);
             this.inputTracking.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input3_KeyDown);
             // 
             // inputEmployee
@@ -369,6 +373,7 @@
             this.inputEmployee.PasswordChar = '*';
             this.inputEmployee.Size = new System.Drawing.Size(148, 20);
             this.inputEmployee.TabIndex = 2;
+            this.inputEmployee.TextChanged += new System.EventHandler(this.inputEmployee_TextChanged);
             this.inputEmployee.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input2_KeyDown);
             // 
             // inputOrderNumber
@@ -472,6 +477,8 @@
             this.inputLogin.PasswordChar = '*';
             this.inputLogin.Size = new System.Drawing.Size(93, 20);
             this.inputLogin.TabIndex = 21;
+            this.inputLogin.TextChanged += new System.EventHandler(this.inputLogin_TextChanged);
+            this.inputLogin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputLogin_KeyDown);
             // 
             // btnLogin
             // 
@@ -554,6 +561,8 @@
             this.inputInventoryAddHeight.Name = "inputInventoryAddHeight";
             this.inputInventoryAddHeight.Size = new System.Drawing.Size(23, 20);
             this.inputInventoryAddHeight.TabIndex = 27;
+            this.inputInventoryAddHeight.TextChanged += new System.EventHandler(this.inputInventoryAddHeight_TextChanged);
+            this.inputInventoryAddHeight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputInventoryAddHeight_KeyDown);
             // 
             // inputInventoryAddWidth
             // 
@@ -561,6 +570,8 @@
             this.inputInventoryAddWidth.Name = "inputInventoryAddWidth";
             this.inputInventoryAddWidth.Size = new System.Drawing.Size(23, 20);
             this.inputInventoryAddWidth.TabIndex = 26;
+            this.inputInventoryAddWidth.TextChanged += new System.EventHandler(this.inputInventoryAddWidth_TextChanged);
+            this.inputInventoryAddWidth.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputInventoryAddWidth_KeyDown);
             // 
             // inputInventoryAddQT
             // 
@@ -568,6 +579,8 @@
             this.inputInventoryAddQT.Name = "inputInventoryAddQT";
             this.inputInventoryAddQT.Size = new System.Drawing.Size(36, 20);
             this.inputInventoryAddQT.TabIndex = 25;
+            this.inputInventoryAddQT.TextChanged += new System.EventHandler(this.inputInventoryAddQT_TextChanged);
+            this.inputInventoryAddQT.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputInventoryAddQT_KeyDown);
             // 
             // btnInventoryAddDone
             // 
@@ -585,6 +598,8 @@
             this.inputInventoryAddLength.Name = "inputInventoryAddLength";
             this.inputInventoryAddLength.Size = new System.Drawing.Size(23, 20);
             this.inputInventoryAddLength.TabIndex = 21;
+            this.inputInventoryAddLength.TextChanged += new System.EventHandler(this.inputInventoryAddLength_TextChanged);
+            this.inputInventoryAddLength.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputInventoryAddLength_KeyDown);
             // 
             // btnInventoryAddAdd
             // 
@@ -656,6 +671,8 @@
             this.inputUpdateTrackingNew.Name = "inputUpdateTrackingNew";
             this.inputUpdateTrackingNew.Size = new System.Drawing.Size(87, 20);
             this.inputUpdateTrackingNew.TabIndex = 22;
+            this.inputUpdateTrackingNew.TextChanged += new System.EventHandler(this.inputUpdateTrackingNew_TextChanged);
+            this.inputUpdateTrackingNew.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputUpdateTrackingNew_KeyDown);
             // 
             // inputUpdateTrackingOrder
             // 
@@ -663,6 +680,8 @@
             this.inputUpdateTrackingOrder.Name = "inputUpdateTrackingOrder";
             this.inputUpdateTrackingOrder.Size = new System.Drawing.Size(86, 20);
             this.inputUpdateTrackingOrder.TabIndex = 21;
+            this.inputUpdateTrackingOrder.TextChanged += new System.EventHandler(this.inputUpdateTrackingOrder_TextChanged);
+            this.inputUpdateTrackingOrder.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputUpdateTrackingOrder_KeyDown);
             // 
             // button4
             // 
@@ -696,10 +715,20 @@
             // 
             // panelReports
             // 
+            this.panelReports.Controls.Add(this.button1);
             this.panelReports.Location = new System.Drawing.Point(6, 4);
             this.panelReports.Name = "panelReports";
             this.panelReports.Size = new System.Drawing.Size(859, 575);
             this.panelReports.TabIndex = 25;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(55, 49);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -708,8 +737,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(864, 579);
-            this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelReports);
+            this.Controls.Add(this.panelMain);
             this.Name = "Form1";
             this.Padding = new System.Windows.Forms.Padding(20);
             this.Text = "Form1";
@@ -731,6 +760,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panelReports.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -792,6 +822,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox inputUpdateTrackingNew;
         private System.Windows.Forms.TextBox inputUpdateTrackingOrder;
+        private System.Windows.Forms.Button button1;
     }
 }
 
