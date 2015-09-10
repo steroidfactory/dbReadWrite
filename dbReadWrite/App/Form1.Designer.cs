@@ -635,33 +635,33 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(9, 78);
+            this.label17.Location = new System.Drawing.Point(3, 80);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(41, 13);
+            this.label17.Size = new System.Drawing.Size(84, 13);
             this.label17.TabIndex = 24;
-            this.label17.Text = "label17";
+            this.label17.Text = "New Tracking #";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(9, 52);
+            this.label15.Location = new System.Drawing.Point(3, 52);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(41, 13);
+            this.label15.Size = new System.Drawing.Size(73, 13);
             this.label15.TabIndex = 23;
-            this.label15.Text = "label15";
+            this.label15.Text = "Order Number";
             // 
             // inputUpdateTrackingNew
             // 
-            this.inputUpdateTrackingNew.Location = new System.Drawing.Point(62, 78);
+            this.inputUpdateTrackingNew.Location = new System.Drawing.Point(88, 77);
             this.inputUpdateTrackingNew.Name = "inputUpdateTrackingNew";
-            this.inputUpdateTrackingNew.Size = new System.Drawing.Size(100, 20);
+            this.inputUpdateTrackingNew.Size = new System.Drawing.Size(87, 20);
             this.inputUpdateTrackingNew.TabIndex = 22;
             // 
             // inputUpdateTrackingOrder
             // 
-            this.inputUpdateTrackingOrder.Location = new System.Drawing.Point(62, 52);
+            this.inputUpdateTrackingOrder.Location = new System.Drawing.Point(88, 52);
             this.inputUpdateTrackingOrder.Name = "inputUpdateTrackingOrder";
-            this.inputUpdateTrackingOrder.Size = new System.Drawing.Size(100, 20);
+            this.inputUpdateTrackingOrder.Size = new System.Drawing.Size(86, 20);
             this.inputUpdateTrackingOrder.TabIndex = 21;
             // 
             // button4
@@ -670,8 +670,9 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(159, 33);
             this.button4.TabIndex = 20;
-            this.button4.Text = "Check";
+            this.button4.Text = "Update";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label16
             // 
@@ -679,9 +680,9 @@
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F);
             this.label16.Location = new System.Drawing.Point(16, 13);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(155, 36);
+            this.label16.Size = new System.Drawing.Size(159, 36);
             this.label16.TabIndex = 17;
-            this.label16.Text = "Tracking #";
+            this.label16.Text = "Update TR";
             // 
             // panel1
             // 

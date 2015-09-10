@@ -248,6 +248,7 @@ namespace App
         {
             readBox.Rows.Clear();
             addTable();
+            readBox.ClearSelection();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -291,24 +292,32 @@ namespace App
             int orderNumber = Int32.Parse(inputOrderStatus.Text);
             try
             {
-                string employee = PackingDB.SelectByOrder(orderNumber)[3][0];
-                MessageBox.Show(
-                    "Order Number: " + orderNumber
-                    + Environment.NewLine +
-                    "Quantity: " + PackingDB.SelectByOrder(orderNumber)[1][0]
-                    + Environment.NewLine +
-                    "Dimentions: " + PackingDB.SelectByOrder(orderNumber)[0][0]
-                    + Environment.NewLine +
-                    PackingDB.statusOrder(inputOrderStatus.Text.ToString())
-                    + Environment.NewLine +
-                    "Employee: " + PackingDB.checkEmployee(employee)[3][0]
-                    + Environment.NewLine +
-                    "Time In: " + PackingDB.SelectByOrder(orderNumber)[5][0]
-                    + Environment.NewLine +
-                    "Time Out: " + PackingDB.SelectByOrder(orderNumber)[6][0]
-                    + Environment.NewLine +
-                    "Tracking Number: " + PackingDB.SelectByOrder(orderNumber)[4][0]
-                    );
+                if (PackingDB.checkIsDuplicateOrder(inputOrderStatus.Text) == true)
+                {
+                    string employee = PackingDB.SelectByOrder(orderNumber)[3][0];
+                    MessageBox.Show(
+                        "Order Number: " + orderNumber
+                        + Environment.NewLine +
+                        "Quantity: " + PackingDB.SelectByOrder(orderNumber)[1][0]
+                        + Environment.NewLine +
+                        "Dimentions: " + PackingDB.SelectByOrder(orderNumber)[0][0]
+                        + Environment.NewLine +
+                        PackingDB.statusOrder(inputOrderStatus.Text.ToString())
+                        + Environment.NewLine +
+                        "Employee: " + PackingDB.checkEmployee(employee)[3][0]
+                        + Environment.NewLine +
+                        "Time In: " + PackingDB.SelectByOrder(orderNumber)[5][0]
+                        + Environment.NewLine +
+                        "Time Out: " + PackingDB.SelectByOrder(orderNumber)[6][0]
+                        + Environment.NewLine +
+                        "Tracking Number: " + PackingDB.SelectByOrder(orderNumber)[4][0]
+                        );
+                }
+                else if(PackingDB.checkIsDuplicateOrder(inputOrderStatus.Text) == false)
+                {
+                    MessageBox.Show("Order does not exist");
+                }
+                
             }
             catch
             {
@@ -539,5 +548,51 @@ namespace App
             Console.WriteLine(readBox.Rows[readBox.CurrentCell.RowIndex].Cells[3]);
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (inputUpdateTrackingOrder.Text != "" && inputUpdateTrackingNew.Text != "")
+            {
+
+                if (PackingDB.checkIsDuplicateOrder(inputUpdateTrackingOrder.Text) == true)
+                {
+                    using (authenticationID checkID = new authenticationID())
+                    {
+                        var result = checkID.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string ID = checkID.ID;
+                            try
+                            {
+
+
+                                if (PackingDB.SelectByOrder(Int32.Parse(inputUpdateTrackingOrder.Text))[3][0] == ID)
+                                {
+                                    PackingDB.updateTracking(inputUpdateTrackingOrder.Text, inputUpdateTrackingNew.Text);
+                                    inputUpdateTrackingNew.Clear();
+                                    inputUpdateTrackingOrder.Clear();
+                                    updateTable();
+                                }
+                                else if (PackingDB.SelectByOrder(Int32.Parse(inputUpdateTrackingOrder.Text))[3][0] != ID)
+                                {
+                                    inputUpdateTrackingNew.Clear();
+                                    inputUpdateTrackingOrder.Clear();
+                                    MessageBox.Show("Unauthorized user");
+                                }
+                            }
+                            catch { }
+                        }
+                        
+                        }
+                }
+                else
+                {
+                    inputUpdateTrackingNew.Clear();
+                    inputUpdateTrackingOrder.Clear();
+                    MessageBox.Show("Order number not found");
+                }
+            }
+        }
+
+        //END
     }
 }

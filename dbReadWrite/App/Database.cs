@@ -798,6 +798,32 @@ namespace App
 
         
 
+        public void updateTracking(string orderNumber, string trackingNumber)
+        {
+            
+           string query = ("UPDATE " + tableOrders + " SET TrackingNumber = " + trackingNumber + " WHERE OrderNumber = " + orderNumber  + ";");
+            try
+            {
+
+                //Open Connection
+                if (OpenConnection() == true)
+                {
+                    //Create Mysql Command
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                    //ExecuteScalar will return one value
+                    cmd.ExecuteScalar();
+
+                    //close Connection
+                    CloseConnection();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
         public void inventoryAdd(string Dimensions, string QT)
         {
             try
