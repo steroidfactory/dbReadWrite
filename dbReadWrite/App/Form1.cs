@@ -75,8 +75,6 @@ namespace App
 
             }
 
-          
-
         //
         //  Input 1
         //
@@ -221,6 +219,22 @@ namespace App
             Console.WriteLine();
         }
 
+        private void reportAddReadBox(string Dimensions, string QT, string orderNumber, string ID, string trackingNumber, string timeIn, string timeOut)
+        {
+            ID = PackingDB.checkEmployee(ID)[3][0];
+            string timeOpened = "";
+            if (timeOut == "")
+            {
+                timeOpened = PackingDB.calcTimeOpen(DateTime.Parse(timeIn));
+            }
+            else if (timeOut != "")
+            {
+                timeOpened = PackingDB.calcTimeClosed(DateTime.Parse(timeIn), DateTime.Parse(timeOut));
+            }
+            string[] data = { orderNumber, ID, trackingNumber, Dimensions, QT, timeIn, timeOut, timeOpened };
+            reportReadBox.Rows.Add(data);
+        }
+
         /// <summary>
         /// PackingDB.Select is causing the performance issue
         /// </summary>
@@ -238,6 +252,17 @@ namespace App
                 
             }
             readBox.Sort(readTimeIn, ListSortDirection.Descending);
+        }
+
+        private void reportAddTable()
+        {
+            int countNum = PackingDB.Count();
+            for (int i = 0; i < countNum; i++)
+            {
+                    reportAddReadBox(PackingDB.Select()[0][i], PackingDB.Select()[1][i], PackingDB.Select()[2][i],
+                     PackingDB.Select()[3][i], PackingDB.Select()[4][i], PackingDB.Select()[5][i], PackingDB.Select()[6][i]);
+            }
+            reportReadBox.Sort(TimeIn, ListSortDirection.Descending);
         }
 
         private void updateTable()
@@ -272,7 +297,7 @@ namespace App
         {
             if (inputOrderStatus.Text != "")
             {
-                checkOrder();
+                checkOrder(inputOrderStatus.Text);
             }
            
         }
@@ -283,15 +308,15 @@ namespace App
             {
                 if (inputOrderStatus.Text != "")
                 {
-                    checkOrder();
+                    checkOrder(inputOrderStatus.Text);
                 }
                     
             }
         }
 
-        private void checkOrder()
+        private void checkOrder(string order)
         {
-            int orderNumber = Int32.Parse(inputOrderStatus.Text);
+            int orderNumber = Int32.Parse(order);
             try
             {
                 if (PackingDB.checkIsDuplicateOrder(inputOrderStatus.Text) == true)
@@ -304,7 +329,7 @@ namespace App
                         + Environment.NewLine +
                         "Dimentions: " + PackingDB.SelectByOrder(orderNumber)[0][0]
                         + Environment.NewLine +
-                        PackingDB.statusOrder(inputOrderStatus.Text.ToString())
+                        PackingDB.statusOrder(order)
                         + Environment.NewLine +
                         "Employee: " + PackingDB.checkEmployee(employee)[3][0]
                         + Environment.NewLine +
@@ -508,7 +533,6 @@ namespace App
 
         private void readBox_KeyDown(object sender, KeyEventArgs e)
         {
-
             if (e.KeyCode == Keys.F12)
             {
                 using (authenticationID checkID = new authenticationID())
@@ -520,9 +544,10 @@ namespace App
 
                         try
                         {
-                            if (Int32.Parse(PackingDB.checkEmployee(ID)[5][0]) >= 3)
+                            if (Int32.Parse(PackingDB.checkEmployee(ID)[5][0]) >= 4)
                             {
-                                Console.WriteLine("granted");
+                                panelMain.Visible = false;
+                                panelReports.Visible = true;
                             }
                             else
                             {
@@ -575,6 +600,7 @@ namespace App
                                     inputUpdateTrackingNew.Clear();
                                     inputUpdateTrackingOrder.Clear();
                                     updateTable();
+                                    inputUpdateTrackingOrder.Focus();
                                 }
                                 else if (PackingDB.SelectByOrder(Int32.Parse(inputUpdateTrackingOrder.Text))[3][0] != ID)
                                 {
@@ -711,17 +737,112 @@ namespace App
 
         private void inputUpdateTrackingNew_KeyDown(object sender, KeyEventArgs e)
         {
-            updateTracking();
+            if (e.KeyCode == Keys.Enter)
+            {
+                updateTracking();
+            }
+           
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+
+        //Converts the DataGridView to DataTable
+        public DataTable dgvToTable(DataGridView dgv, String tblName)
         {
-            DataTable dtFromGrid = new DataTable();
-            dtFromGrid = readBox.DataSource as DataTable;
-            ExportToExcel.CreateExcelFile.CreateExcelDocument(dtFromGrid, "C:\\Sample.xlsx");
+            int minRow = 0;
+            DataTable dt = new DataTable(tblName);
+
+            // Header columns
+            foreach (DataGridViewColumn column in dgv.Columns)
+            {
+                DataColumn dc = new DataColumn(column.Name.ToString());
+                dt.Columns.Add(dc);
+            }
+
+            // Data cells
+            for (int i = 0; i < dgv.Rows.Count; i++)
+            {
+                DataGridViewRow row = dgv.Rows[i];
+                DataRow dr = dt.NewRow();
+                for (int j = 0; j < dgv.Columns.Count; j++)
+                {
+                    dr[j] = (row.Cells[j].Value == null) ? "" : row.Cells[j].Value.ToString();
+                }
+                dt.Rows.Add(dr);
+            }
+
+            // Related to the bug arround min size when using ExcelLibrary for export
+            for (int i = dgv.Rows.Count; i < minRow; i++)
+            {
+                DataRow dr = dt.NewRow();
+                for (int j = 0; j < dt.Columns.Count; j++)
+                {
+                    dr[j] = "  ";
+                }
+                dt.Rows.Add(dr);
+            }
+            return dt;
         }
 
 
+        private void reportExport()
+        {
+            try
+            {
+                DataTable dTable = dgvToTable(readBox, "dataTable");
+                ExportToExcel.CreateExcelFile.CreateExcelDocument(dTable, "C:\\Sample.xlsx");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void menuFileExit_Click(object sender, EventArgs e)
+        {
+            panelReports.Visible = false;
+            panelMain.Visible = true;
+        }
+
+        private void btnReportCheckOrder_Click(object sender, EventArgs e)
+        {
+            if (reportInputCheckStatus.Text != "")
+            {
+                checkOrder(reportInputCheckStatus.Text);
+                reportInputCheckStatus.Clear();
+            }
+        }
+
+        private void reportInputCheckStatus_TextChanged(object sender, EventArgs e)
+        {
+            inputNumbersOnly(reportInputCheckStatus);
+        }
+
+        private void menuFileExport_Click(object sender, EventArgs e)
+        {
+            reportExport();
+        }
+
+        private void reportBtnUpdateReadBox_Click(object sender, EventArgs e)
+        {
+            reportUpdateReadBox();
+        }
+        
+        private void reportUpdateReadBox()
+        {
+            reportReadBox.Rows.Clear();
+            reportAddTable();
+        }
+
+        private void menuFilterByDate_Click(object sender, EventArgs e)
+        {
+            filterDateStart.Visible = true;
+            filterDateEnd.Visible = true;
+        }
+
+        private void filterDateStart_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            Console.WriteLine(e.Start);
+        }
 
         //END
     }

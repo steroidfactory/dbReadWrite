@@ -439,7 +439,7 @@ namespace App
             int differenceInHours = ts.Hours;
             // Difference in Minutes.
             int differenceInMinutes = ts.Minutes;
-            return ("Order is open for: " + differenceInDays + " Days, " + differenceInHours + " hours, and " + differenceInMinutes + " minutes");
+            return ("Open: " + differenceInDays + "Days " + differenceInHours + "Hrs " + differenceInMinutes + "Mins");
         }
 
         public string calcTimeClosed(DateTime started, DateTime ended)
@@ -452,7 +452,7 @@ namespace App
             int differenceInHours = ts.Hours;
             // Difference in Minutes.
             int differenceInMinutes = ts.Minutes;
-            return ("Order was open for: " + differenceInDays + " Days, " + differenceInHours + " hours, and " + differenceInMinutes + " minutes");
+            return ("Closed: " + differenceInDays + "Days " + differenceInHours + "Hrs " + differenceInMinutes + "Mins");
         }
 
         public int orderToIndex(string orderNumber)
@@ -483,6 +483,68 @@ namespace App
             else
             {
                 return 2;
+            }
+        }
+
+        //Select statement
+        public List<string>[] SelectByDate(int startMonth, int startDay, int startYear, int endMonth, int endDay, int endYear)
+        {
+        
+            string query = "SELECT * FROM " + tableOrders + " WHERE TimeIn BETWEEN " + 
+                "'" + startYear + "-" + startMonth + "-" + startDay + " 00:00:00 " + "'" + "AND " +
+                    "'" + endYear + "-" + endMonth + "-" + endDay + " 12:00:00 " + "'" + ";";
+         
+            //string query = "SELECT * FROM orders WHERE OrderNumber = 99;";
+            //int countNum = Count();
+            //Create a list to store the result
+            List<string>[] list = new List<string>[7];
+            //for (int i = 0; i<=4; i++)
+            //{
+            list[0] = new List<string>();
+            list[1] = new List<string>();
+            list[2] = new List<string>();
+            list[3] = new List<string>();
+            list[4] = new List<string>();
+            list[5] = new List<string>();
+            list[6] = new List<string>();
+            //}
+
+            //Open connection
+            if (OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                // MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                using (MySqlDataReader dataReader = cmd.ExecuteReader())
+                {
+                    while (dataReader.Read())
+                    {
+                        list[0].Add(dataReader["Dimensions"] + "");
+                        list[1].Add(dataReader["QT"] + "");
+                        list[2].Add(dataReader["OrderNumber"] + "");
+                        list[3].Add(dataReader["Employee"] + "");
+                        list[4].Add(dataReader["TrackingNumber"] + "");
+                        list[5].Add(dataReader["TimeIn"] + "");
+                        list[6].Add(dataReader["TimeOut"] + "");
+
+                        //Console.WriteLine(dataReader["Index_ID"].ToString() + dataReader["QT"] + dataReader["OrderNumber"]
+                        //+ dataReader["ID"] + dataReader["TrackingNumber"] + dataReader["TimeIn"] );
+                    }
+                    //close Data Reader
+                    dataReader.Close();
+
+                    //close Connection
+                    CloseConnection();
+                }
+                //return list to be displayed
+                return list;
+            }
+            else
+            {
+                return list;
             }
         }
 

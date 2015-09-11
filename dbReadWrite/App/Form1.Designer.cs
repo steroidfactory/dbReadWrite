@@ -31,6 +31,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelReadBox = new System.Windows.Forms.Panel();
             this.readBox = new System.Windows.Forms.DataGridView();
             this.readDM = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +59,31 @@
             this.inputOrderNumber = new System.Windows.Forms.TextBox();
             this.listQT = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.panelReports = new System.Windows.Forms.Panel();
+            this.filterDateEnd = new System.Windows.Forms.MonthCalendar();
+            this.filterDateStart = new System.Windows.Forms.MonthCalendar();
+            this.reportBtnUpdateReadBox = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuFileExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterByToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuFilterByDate = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.reportBtnCheckOrder = new System.Windows.Forms.Button();
+            this.reportInputCheckStatus = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.reportReadBox = new System.Windows.Forms.DataGridView();
+            this.OrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Employee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TrackingNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BoxDimensions = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BoxQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeIn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeOpened = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelInventory = new System.Windows.Forms.Panel();
             this.btnInventoryAdd = new System.Windows.Forms.Button();
             this.btnInventoryCheck = new System.Windows.Forms.Button();
@@ -86,20 +114,23 @@
             this.button4 = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panelReports = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.noneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelReadBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.readBox)).BeginInit();
             this.panelOrderStatus.SuspendLayout();
             this.panelInput.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panelReports.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reportReadBox)).BeginInit();
             this.panelInventory.SuspendLayout();
             this.panelLogin.SuspendLayout();
             this.panelInventoryAdd.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panelReports.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelReadBox
@@ -407,6 +438,237 @@
             this.label7.Text = "DM";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panelReports
+            // 
+            this.panelReports.Controls.Add(this.filterDateEnd);
+            this.panelReports.Controls.Add(this.filterDateStart);
+            this.panelReports.Controls.Add(this.reportBtnUpdateReadBox);
+            this.panelReports.Controls.Add(this.panel4);
+            this.panelReports.Controls.Add(this.panel2);
+            this.panelReports.Controls.Add(this.reportReadBox);
+            this.panelReports.Location = new System.Drawing.Point(3, 6);
+            this.panelReports.Name = "panelReports";
+            this.panelReports.Size = new System.Drawing.Size(859, 575);
+            this.panelReports.TabIndex = 25;
+            // 
+            // filterDateEnd
+            // 
+            this.filterDateEnd.Location = new System.Drawing.Point(294, 59);
+            this.filterDateEnd.Name = "filterDateEnd";
+            this.filterDateEnd.TabIndex = 19;
+            this.filterDateEnd.Visible = false;
+            // 
+            // filterDateStart
+            // 
+            this.filterDateStart.Location = new System.Drawing.Point(31, 59);
+            this.filterDateStart.Name = "filterDateStart";
+            this.filterDateStart.TabIndex = 18;
+            this.filterDateStart.Visible = false;
+            this.filterDateStart.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.filterDateStart_DateChanged);
+            // 
+            // reportBtnUpdateReadBox
+            // 
+            this.reportBtnUpdateReadBox.Location = new System.Drawing.Point(534, 125);
+            this.reportBtnUpdateReadBox.Name = "reportBtnUpdateReadBox";
+            this.reportBtnUpdateReadBox.Size = new System.Drawing.Size(103, 33);
+            this.reportBtnUpdateReadBox.TabIndex = 17;
+            this.reportBtnUpdateReadBox.Text = "Update Table";
+            this.reportBtnUpdateReadBox.UseVisualStyleBackColor = true;
+            this.reportBtnUpdateReadBox.Click += new System.EventHandler(this.reportBtnUpdateReadBox_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.menuStrip1);
+            this.panel4.Location = new System.Drawing.Point(0, 6);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(851, 29);
+            this.panel4.TabIndex = 16;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.Color.DarkGray;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.filterByToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(851, 24);
+            this.menuStrip1.TabIndex = 16;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuFileExport,
+            this.toolStripSeparator1,
+            this.menuFileExit});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // menuFileExport
+            // 
+            this.menuFileExport.Name = "menuFileExport";
+            this.menuFileExport.Size = new System.Drawing.Size(107, 22);
+            this.menuFileExport.Text = "Export";
+            this.menuFileExport.Click += new System.EventHandler(this.menuFileExport_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(104, 6);
+            // 
+            // menuFileExit
+            // 
+            this.menuFileExit.Name = "menuFileExit";
+            this.menuFileExit.Size = new System.Drawing.Size(107, 22);
+            this.menuFileExit.Text = "Exit";
+            this.menuFileExit.Click += new System.EventHandler(this.menuFileExit_Click);
+            // 
+            // filterByToolStripMenuItem
+            // 
+            this.filterByToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.noneToolStripMenuItem,
+            this.menuFilterByDate});
+            this.filterByToolStripMenuItem.Name = "filterByToolStripMenuItem";
+            this.filterByToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.filterByToolStripMenuItem.Text = "Filter by";
+            // 
+            // menuFilterByDate
+            // 
+            this.menuFilterByDate.Name = "menuFilterByDate";
+            this.menuFilterByDate.Size = new System.Drawing.Size(152, 22);
+            this.menuFilterByDate.Text = "Date";
+            this.menuFilterByDate.Click += new System.EventHandler(this.menuFilterByDate_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.reportBtnCheckOrder);
+            this.panel2.Controls.Add(this.reportInputCheckStatus);
+            this.panel2.Controls.Add(this.label18);
+            this.panel2.Location = new System.Drawing.Point(662, 59);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(189, 152);
+            this.panel2.TabIndex = 14;
+            // 
+            // reportBtnCheckOrder
+            // 
+            this.reportBtnCheckOrder.Location = new System.Drawing.Point(16, 103);
+            this.reportBtnCheckOrder.Name = "reportBtnCheckOrder";
+            this.reportBtnCheckOrder.Size = new System.Drawing.Size(159, 33);
+            this.reportBtnCheckOrder.TabIndex = 20;
+            this.reportBtnCheckOrder.Text = "Check Order";
+            this.reportBtnCheckOrder.UseVisualStyleBackColor = true;
+            this.reportBtnCheckOrder.Click += new System.EventHandler(this.btnReportCheckOrder_Click);
+            // 
+            // reportInputCheckStatus
+            // 
+            this.reportInputCheckStatus.Location = new System.Drawing.Point(44, 65);
+            this.reportInputCheckStatus.Name = "reportInputCheckStatus";
+            this.reportInputCheckStatus.Size = new System.Drawing.Size(93, 20);
+            this.reportInputCheckStatus.TabIndex = 19;
+            this.reportInputCheckStatus.TextChanged += new System.EventHandler(this.reportInputCheckStatus_TextChanged);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F);
+            this.label18.Location = new System.Drawing.Point(6, 13);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(182, 36);
+            this.label18.TabIndex = 17;
+            this.label18.Text = "Check Order";
+            // 
+            // reportReadBox
+            // 
+            this.reportReadBox.AllowUserToAddRows = false;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.reportReadBox.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.reportReadBox.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.reportReadBox.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.OrderNumber,
+            this.Employee,
+            this.TrackingNumber,
+            this.BoxDimensions,
+            this.BoxQuantity,
+            this.TimeIn,
+            this.TimeOut,
+            this.TimeOpened});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.reportReadBox.DefaultCellStyle = dataGridViewCellStyle5;
+            this.reportReadBox.Location = new System.Drawing.Point(14, 233);
+            this.reportReadBox.Name = "reportReadBox";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.reportReadBox.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.reportReadBox.Size = new System.Drawing.Size(826, 337);
+            this.reportReadBox.TabIndex = 3;
+            // 
+            // OrderNumber
+            // 
+            this.OrderNumber.HeaderText = "Order Number";
+            this.OrderNumber.Name = "OrderNumber";
+            this.OrderNumber.Width = 90;
+            // 
+            // Employee
+            // 
+            this.Employee.HeaderText = "Employee";
+            this.Employee.Name = "Employee";
+            this.Employee.Width = 65;
+            // 
+            // TrackingNumber
+            // 
+            this.TrackingNumber.HeaderText = "Tracking Number";
+            this.TrackingNumber.Name = "TrackingNumber";
+            // 
+            // BoxDimensions
+            // 
+            this.BoxDimensions.HeaderText = "Box Dimensions";
+            this.BoxDimensions.Name = "BoxDimensions";
+            this.BoxDimensions.Width = 80;
+            // 
+            // BoxQuantity
+            // 
+            this.BoxQuantity.HeaderText = "Box Quantity";
+            this.BoxQuantity.Name = "BoxQuantity";
+            this.BoxQuantity.Width = 50;
+            // 
+            // TimeIn
+            // 
+            this.TimeIn.HeaderText = "TimeIn";
+            this.TimeIn.Name = "TimeIn";
+            this.TimeIn.Width = 125;
+            // 
+            // TimeOut
+            // 
+            this.TimeOut.HeaderText = "Time Out";
+            this.TimeOut.Name = "TimeOut";
+            this.TimeOut.Width = 125;
+            // 
+            // TimeOpened
+            // 
+            this.TimeOpened.HeaderText = "Time Opened";
+            this.TimeOpened.Name = "TimeOpened";
+            this.TimeOpened.Width = 150;
+            // 
             // panelInventory
             // 
             this.panelInventory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -713,23 +975,11 @@
             this.panel1.Size = new System.Drawing.Size(189, 152);
             this.panel1.TabIndex = 24;
             // 
-            // panelReports
+            // noneToolStripMenuItem
             // 
-            this.panelReports.Controls.Add(this.button1);
-            this.panelReports.Location = new System.Drawing.Point(6, 4);
-            this.panelReports.Name = "panelReports";
-            this.panelReports.Size = new System.Drawing.Size(859, 575);
-            this.panelReports.TabIndex = 25;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(55, 49);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.noneToolStripMenuItem.Text = "None";
             // 
             // Form1
             // 
@@ -751,6 +1001,14 @@
             this.panelInput.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.panelReports.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reportReadBox)).EndInit();
             this.panelInventory.ResumeLayout(false);
             this.panelInventory.PerformLayout();
             this.panelLogin.ResumeLayout(false);
@@ -761,7 +1019,6 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panelReports.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -823,7 +1080,31 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox inputUpdateTrackingNew;
         private System.Windows.Forms.TextBox inputUpdateTrackingOrder;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView reportReadBox;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button reportBtnCheckOrder;
+        private System.Windows.Forms.TextBox reportInputCheckStatus;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuFileExport;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuFileExit;
+        private System.Windows.Forms.Button reportBtnUpdateReadBox;
+        private System.Windows.Forms.MonthCalendar filterDateStart;
+        private System.Windows.Forms.ToolStripMenuItem filterByToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuFilterByDate;
+        private System.Windows.Forms.MonthCalendar filterDateEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Employee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TrackingNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BoxDimensions;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BoxQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeIn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeOut;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeOpened;
+        private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem;
     }
 }
 
