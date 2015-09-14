@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace App
 {
@@ -784,12 +785,12 @@ namespace App
         }
 
 
-        private void reportExport()
+        private void reportExport(string location)
         {
             try
             {
-                DataTable dTable = dgvToTable(readBox, "dataTable");
-                ExportToExcel.CreateExcelFile.CreateExcelDocument(dTable, "C:\\Sample.xlsx");
+                DataTable dTable = dgvToTable(reportReadBox, "dataTable");
+                ExportToExcel.CreateExcelFile.CreateExcelDocument(dTable, location);
             }
             catch (Exception ex)
             {
@@ -819,7 +820,21 @@ namespace App
 
         private void menuFileExport_Click(object sender, EventArgs e)
         {
-            reportExport();
+            exportSave.Filter = "Excel File | *.xlsx";
+            DialogResult result = exportSave.ShowDialog();
+            // string [] file = Directory.GetFiles(SSelectedPath);
+            Console.WriteLine(exportSave.FileName);
+            if (exportSave.FileName != "")
+            {
+                reportExport(exportSave.FileName.ToString());
+                exportSave.FileName = "";
+                
+            }
+            else
+            {
+                MessageBox.Show("Please enter a file name");
+            }
+            
         }
 
         private void reportBtnUpdateReadBox_Click(object sender, EventArgs e)

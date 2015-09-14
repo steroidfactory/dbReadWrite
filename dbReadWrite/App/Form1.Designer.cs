@@ -70,6 +70,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.filterByToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.noneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFilterByDate = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.reportBtnCheckOrder = new System.Windows.Forms.Button();
@@ -114,7 +115,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.noneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportSave = new System.Windows.Forms.SaveFileDialog();
             this.panelReadBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.readBox)).BeginInit();
             this.panelOrderStatus.SuspendLayout();
@@ -509,19 +510,19 @@
             // menuFileExport
             // 
             this.menuFileExport.Name = "menuFileExport";
-            this.menuFileExport.Size = new System.Drawing.Size(107, 22);
+            this.menuFileExport.Size = new System.Drawing.Size(152, 22);
             this.menuFileExport.Text = "Export";
             this.menuFileExport.Click += new System.EventHandler(this.menuFileExport_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(104, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // menuFileExit
             // 
             this.menuFileExit.Name = "menuFileExit";
-            this.menuFileExit.Size = new System.Drawing.Size(107, 22);
+            this.menuFileExit.Size = new System.Drawing.Size(152, 22);
             this.menuFileExit.Text = "Exit";
             this.menuFileExit.Click += new System.EventHandler(this.menuFileExit_Click);
             // 
@@ -534,10 +535,16 @@
             this.filterByToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.filterByToolStripMenuItem.Text = "Filter by";
             // 
+            // noneToolStripMenuItem
+            // 
+            this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.noneToolStripMenuItem.Text = "None";
+            // 
             // menuFilterByDate
             // 
             this.menuFilterByDate.Name = "menuFilterByDate";
-            this.menuFilterByDate.Size = new System.Drawing.Size(152, 22);
+            this.menuFilterByDate.Size = new System.Drawing.Size(103, 22);
             this.menuFilterByDate.Text = "Date";
             this.menuFilterByDate.Click += new System.EventHandler(this.menuFilterByDate_Click);
             // 
@@ -975,12 +982,6 @@
             this.panel1.Size = new System.Drawing.Size(189, 152);
             this.panel1.TabIndex = 24;
             // 
-            // noneToolStripMenuItem
-            // 
-            this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.noneToolStripMenuItem.Text = "None";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1105,6 +1106,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeOut;
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeOpened;
         private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog exportSave;
     }
 }
 
